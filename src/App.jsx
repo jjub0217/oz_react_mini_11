@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.scss";
+import { MovieCard } from "./components/MovieCard";
+import MoviePopular from "./components/MoviePopular";
+import movieListData from "./data/movieListData.json";
 
-function App() {
-  const [count, setCount] = useState(0)
+function App({ IMAGE_BASE_URL }) {
+  const [originalList, setOriginalList] = useState([]);
+  const [sortedList, setSortedList] = useState([]);
+
+  useEffect(() => {
+    // setMovieList(movieListData.results);
+    const original = movieListData.results;
+    const sorted = [...original].sort((a, b) => b.popularity - a.popularity);
+
+    setOriginalList(original);
+    setSortedList(sorted);
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main>
+        {originalList.length === 0 ? (
+          <p>영화 데이터를 불러오는 중입니다...</p>
+        ) : (
+          <>
+            <section className="section-popular">
+              <MoviePopular
+                sortedList={sortedList}
+                IMAGE_BASE_URL={IMAGE_BASE_URL}
+              />
+            </section>
+            <section className="max-w-screen-xl">
+              <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px]">
+                실시간 인기 영화
+              </h2>
+              <ul className="flex flex-wrap gap-[20px] justify-start">
+                {originalList.map((el) => (
+                  <MovieCard
+                    key={el.id}
+                    IMAGE_BASE_URL={IMAGE_BASE_URL}
+                    {...el}
+                  />
+                ))}
+              </ul>
+            </section>
+          </>
+        )}
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
