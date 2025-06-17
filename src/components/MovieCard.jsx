@@ -14,7 +14,7 @@ const CardContainer = styled.div.withConfig({
     min-width: ${(props) => (props.isSwiper ? "700px" : "")};
     height: ${(props) => (props.isSwiper ? "" : "280px")};
     padding-bottom: ${(props) =>
-      props.isSwiper ? "calc((350 / 700) * 100%)" : ""};
+      props.isSwiper ? "calc((370 / 700) * 100%)" : ""};
 
     img {
       position: ${(props) => (props.isSwiper ? "absolute" : "")};

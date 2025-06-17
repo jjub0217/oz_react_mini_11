@@ -13,6 +13,7 @@ export default function MoviePopular({ sortedList, IMAGE_BASE_URL }) {
         spaceBetween={20}
         modules={[Autoplay, Navigation]}
         slidesPerView="auto"
+        navigation={true}
         // autoplay={{
         //   delay: 5000, // 슬라이드 간 시간 (ms)
         //   disableOnInteraction: false, // 사용자 터치 후에도 계속 자동재생

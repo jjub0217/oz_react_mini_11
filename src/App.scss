@@ -11,8 +11,18 @@
   }
   .swiper-button-prev,
   .swiper-button-next {
-    display: none;
+    // display: none;
+    opacity: 0.5;
+    color: #fff;
+    &:after {
+      font-size: 30px;
+      font-weight: 900;
+    }
   }
+
+  // .swiper-button-next:hover {
+  //   display: block;
+  // }
 }
 
 .logo {
