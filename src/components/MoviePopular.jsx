@@ -1,6 +1,7 @@
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css/pagination";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MovieCard } from "./MovieCard";
 
@@ -11,9 +12,10 @@ export default function MoviePopular({ sortedList, IMAGE_BASE_URL }) {
         loop={true}
         centeredSlides={true}
         spaceBetween={20}
-        modules={[Autoplay, Navigation]}
+        modules={[Autoplay, Navigation, Pagination]}
         slidesPerView="auto"
         navigation={true}
+        pagination={{ clickable: true }}
         // autoplay={{
         //   delay: 5000, // 슬라이드 간 시간 (ms)
         //   disableOnInteraction: false, // 사용자 터치 후에도 계속 자동재생
