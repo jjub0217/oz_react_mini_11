@@ -32,7 +32,7 @@ function App({ IMAGE_BASE_URL }) {
             </section>
             <section className="max-w-screen-xl">
               <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px]">
-                실시간 인기 영화
+                새로 올라온 영화
               </h2>
               <ul className="flex flex-wrap gap-[20px] justify-start">
                 {originalList.map((el) => (
