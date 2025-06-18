@@ -11,17 +11,17 @@ export default function MoviePopular({ sortedList, IMAGE_BASE_URL }) {
       <Swiper
         loop={true}
         centeredSlides={true}
-        spaceBetween={20}
+        spaceBetween={10}
         modules={[Autoplay, Navigation, Pagination]}
         slidesPerView="auto"
         navigation={true}
-        pagination={{ clickable: true }}
+        pagination={{ type: "fraction" }}
         // autoplay={{
         //   delay: 5000, // 슬라이드 간 시간 (ms)
         //   disableOnInteraction: false, // 사용자 터치 후에도 계속 자동재생
         // }}
       >
-        {sortedList.slice(0, 20).map((el) => (
+        {sortedList.slice(0, 10).map((el) => (
           <SwiperSlide key={el.id}>
             <MovieCard
               key={el.id}

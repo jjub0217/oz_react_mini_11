@@ -30,19 +30,21 @@ function App({ IMAGE_BASE_URL }) {
                 IMAGE_BASE_URL={IMAGE_BASE_URL}
               />
             </section>
-            <section className="max-w-screen-xl">
-              <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px]">
-                새로 올라온 영화
-              </h2>
-              <ul className="flex flex-wrap gap-[20px] justify-start">
-                {originalList.map((el) => (
-                  <MovieCard
-                    key={el.id}
-                    IMAGE_BASE_URL={IMAGE_BASE_URL}
-                    {...el}
-                  />
-                ))}
-              </ul>
+            <section className="">
+              <div className="inner">
+                <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px] text-left">
+                  새로 올라온 영화
+                </h2>
+                <ul className="grid gap-[10px] grid-cols-[repeat(8,0.2fr)] justify-start">
+                  {originalList.map((el) => (
+                    <MovieCard
+                      key={el.id}
+                      IMAGE_BASE_URL={IMAGE_BASE_URL}
+                      {...el}
+                    />
+                  ))}
+                </ul>
+              </div>
             </section>
           </>
         )}

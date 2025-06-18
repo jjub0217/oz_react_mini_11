@@ -5,18 +5,19 @@ import styled from "styled-components";
 const CardContainer = styled(({ isSwiper, viewportWidth, ...rest }) => (
   <div {...rest} />
 ))`
-  width: ${(props) => (props.isSwiper ? "" : "calc((100% / 6) - 20px)")};
-  overflow: hidden;
-  border-radius: ${(props) => (props.isSwiper ? "12px" : "3px")};
   cursor: pointer;
   .image_box {
     position: relative;
+    overflow: hidden;
     width: 100%;
+    height: ${(props) => (props.isSwiper ? "" : "23vh")};
+    border-radius: 5px;
+
     min-width: ${({ isSwiper, viewportWidth }) =>
-      isSwiper ? `${viewportWidth * (1600 / 1719)}px` : "auto"};
-    height: ${(props) => (props.isSwiper ? "" : "280px")};
+      isSwiper ? `${viewportWidth * (900 / 1719)}px` : "auto"};
     padding-bottom: ${({ isSwiper, viewportWidth }) =>
-      isSwiper ? `${viewportWidth * (530 / 1600)}px` : "0"};
+      isSwiper ? `${viewportWidth * (195 / 900)}px` : "0"};
+
     img {
       position: ${(props) => (props.isSwiper ? "absolute" : "")};
       top: ${(props) => (props.isSwiper ? "0" : "")};
@@ -61,8 +62,8 @@ export const MovieCard = (props) => {
         <img
           src={
             isSwiper
-              ? `${IMAGE_BASE_URL}${poster_path}`
-              : `${IMAGE_BASE_URL}${backdrop_path}}`
+              ? `${IMAGE_BASE_URL}${backdrop_path}}`
+              : `${IMAGE_BASE_URL}${poster_path}`
           }
           alt={title}
           onLoad={() => setIsLoaded(true)}
