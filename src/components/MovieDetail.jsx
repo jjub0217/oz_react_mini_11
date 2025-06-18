@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../constant/imageBaseUrl";
 import useFetchGenres from "../hooks/useFetchGenres";
+import { SkeletonDetail } from "./SkeletonDetail";
 
 export const MovieDetail = ({ popularList }) => {
   const { id } = useParams();
@@ -10,22 +11,26 @@ export const MovieDetail = ({ popularList }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [matchedGenres, setMatchedGenres] = useState([]);
 
-  const { results } = useFetchGenres(`${API_URL}/genre/movie/list?language=ko`);
+  const { results: genreList, isLoading: genreLoading } = useFetchGenres(
+    `${API_URL}/genre/movie/list?language=ko`
+  );
 
   useEffect(() => {
-    if (popularList.length == 0 || results.length === 0) return;
+    if (popularList.length == 0 || genreList.length === 0) return;
     const detailMovie = popularList.find((el) => el.id === Number(id));
     setDetail(detailMovie);
 
     if (detailMovie) {
-      const matchedGenre = results.filter((genre) =>
+      const matchedGenre = genreList.filter((genre) =>
         detailMovie.genre_ids.includes(genre.id)
       );
       setMatchedGenres(matchedGenre);
     }
-  }, [id, popularList, results]);
+  }, [id, popularList, genreList]);
 
-  if (!detail) return <p>📄 상세 정보를 불러오는 중입니다...</p>;
+  if (!detail || genreLoading) {
+    return <SkeletonDetail />;
+  }
 
   return (
     <section className="max-w-screen-lg h-[calc(100vh-60px)] justify-center text-[#fff]">
