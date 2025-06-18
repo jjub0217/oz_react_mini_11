@@ -5,7 +5,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MovieCard } from "./MovieCard";
 
-export function MoviePopular({ sortedList }) {
+export function MoviePopular({ popularList }) {
   return (
     <Swiper
       loop={true}
@@ -20,7 +20,7 @@ export function MoviePopular({ sortedList }) {
       //   disableOnInteraction: false, // 사용자 터치 후에도 계속 자동재생
       // }}
     >
-      {sortedList.slice(0, 10).map((el) => (
+      {popularList.slice(0, 10).map((el) => (
         <SwiperSlide key={el.id}>
           <MovieCard key={el.id} {...el} isSwiper={true} />
         </SwiperSlide>
