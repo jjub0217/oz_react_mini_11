@@ -1,54 +1,56 @@
 import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.scss";
-import { MovieCard } from "./components/MovieCard";
-import MoviePopular from "./components/MoviePopular";
-import movieListData from "./data/movieListData.json";
+import Layout from "./components/Layout";
+import { Main } from "./components/Main";
+import { MovieDetail } from "./components/MovieDetail";
+import { API_URL } from "./constant/imageBaseUrl";
+import useFetch from "./hooks/useFetch";
 
-function App({ IMAGE_BASE_URL }) {
-  const [originalList, setOriginalList] = useState([]);
+function App() {
+  const [popularList, setPopularList] = useState([]);
   const [sortedList, setSortedList] = useState([]);
 
-  useEffect(() => {
-    // setMovieList(movieListData.results);
-    const original = movieListData.results;
-    const sorted = [...original].sort((a, b) => b.popularity - a.popularity);
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_V4_TOKEN}`,
+    },
+  };
 
-    setOriginalList(original);
-    setSortedList(sorted);
+  const { isLoading, results } = useFetch(
+    `${API_URL}/movie/popular?language=ko-KR&page=1`,
+    options
+  );
+
+  useEffect(() => {
+    // useFetch;
+    // const original = movieListData.results;
+    // const sorted = [...data].sort((a, b) => b.popularity - a.popularity);
+    // setOriginalList(original);
+    // setSortedList(sorted);
   }, []);
+
+  useEffect(() => {
+    if (results.length !== 0) {
+      const popularMovieList = results.filter((el) => el.adult === false);
+      setPopularList(popularMovieList);
+    }
+  }, [results]);
 
   return (
     <>
-      <main>
-        {originalList.length === 0 ? (
-          <p>영화 데이터를 불러오는 중입니다...</p>
-        ) : (
-          <>
-            <section className="section-popular">
-              <MoviePopular
-                sortedList={sortedList}
-                IMAGE_BASE_URL={IMAGE_BASE_URL}
-              />
-            </section>
-            <section className="">
-              <div className="inner">
-                <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px] text-left">
-                  새로 올라온 영화
-                </h2>
-                <ul className="grid gap-[10px] grid-cols-[repeat(8,0.2fr)] justify-start">
-                  {originalList.map((el) => (
-                    <MovieCard
-                      key={el.id}
-                      IMAGE_BASE_URL={IMAGE_BASE_URL}
-                      {...el}
-                    />
-                  ))}
-                </ul>
-              </div>
-            </section>
-          </>
-        )}
-      </main>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route
+            index
+            element={<Main popularList={popularList} sortedList={sortedList} />}
+          />
+          {/* <Route path="/" element={<App IMAGE_BASE_URL={IMAGE_BASE_URL} />} /> */}
+          <Route path={`/detail/:id`} element={<MovieDetail />} />
+        </Route>
+      </Routes>
     </>
   );
 }
