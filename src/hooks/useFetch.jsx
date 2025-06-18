@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 
-const useFetch = (url, options = {}) => {
+const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_V4_TOKEN}`,
+    },
+  };
 
   const getData = async () => {
     try {
