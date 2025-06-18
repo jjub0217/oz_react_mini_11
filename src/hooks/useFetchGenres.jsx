@@ -15,6 +15,7 @@ const useFetchGenres = (url) => {
 
   const getData = async () => {
     try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       const res = await fetch(url, options);
       if (!res.ok) throw new Error("데이터를 가져오는 데 실패했습니다.");
       const json = await res.json();
