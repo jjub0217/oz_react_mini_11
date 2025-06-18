@@ -1,7 +1,7 @@
 import { MovieCard } from "./MovieCard";
 import { MoviePopular } from "./MoviePopular";
 
-export const Main = ({ popularList, sortedList }) => {
+export const Main = ({ popularList }) => {
   return (
     <main>
       {popularList.length === 0 ? (

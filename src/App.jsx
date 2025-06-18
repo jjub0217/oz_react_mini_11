@@ -9,7 +9,6 @@ import useFetch from "./hooks/useFetch";
 
 function App() {
   const [popularList, setPopularList] = useState([]);
-  const [sortedList, setSortedList] = useState([]);
 
   const { isLoading, results } = useFetch(
     `${API_URL}/movie/popular?language=ko-KR&page=1`
@@ -26,10 +25,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route
-            index
-            element={<Main popularList={popularList} sortedList={sortedList} />}
-          />
+          <Route index element={<Main popularList={popularList} />} />
           {/* <Route path="/" element={<App IMAGE_BASE_URL={IMAGE_BASE_URL} />} /> */}
           <Route
             path={`/detail/:id`}
