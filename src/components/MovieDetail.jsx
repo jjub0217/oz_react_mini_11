@@ -1,22 +1,29 @@
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import movieDetailData from "../data/movieDetailData.json";
+import { API_URL } from "../constant/imageBaseUrl";
+import useFetchGenres from "../hooks/useFetchGenres";
 
-export const MovieDetail = () => {
+export const MovieDetail = ({ popularList }) => {
   const { id } = useParams();
-
-  // const { title, vote_average, poster_path, genres, overview } =
-  //   movieDetailData;
-
-  // console.log(IMAGE_BASE_URL);
-
   const [detail, setDetail] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [matchedGenres, setMatchedGenres] = useState([]);
+
+  const { results } = useFetchGenres(`${API_URL}/genre/movie/list?language=ko`);
 
   useEffect(() => {
-    setDetail(movieDetailData);
-  }, []);
+    if (popularList.length == 0 || results.length === 0) return;
+    const detailMovie = popularList.find((el) => el.id === Number(id));
+    setDetail(detailMovie);
+
+    if (detailMovie) {
+      const matchedGenre = results.filter((genre) =>
+        detailMovie.genre_ids.includes(genre.id)
+      );
+      setMatchedGenres(matchedGenre);
+    }
+  }, [id, popularList, results]);
 
   if (!detail) return <p>📄 상세 정보를 불러오는 중입니다...</p>;
 
@@ -43,7 +50,7 @@ export const MovieDetail = () => {
             </p>
           </div>
           <div className="flex gap-[5px]">
-            {detail.genres.map((el) => (
+            {matchedGenres.map((el) => (
               <span key={el.id} className="text-[13px]">
                 {el.name}
               </span>
