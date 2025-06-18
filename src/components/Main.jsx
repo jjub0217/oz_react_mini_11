@@ -16,7 +16,7 @@ export const Main = ({ popularList }) => {
               <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px] text-left">
                 새로 올라온 영화
               </h2>
-              <ul className="grid gap-[10px] grid-cols-[repeat(8,0.2fr)] justify-start">
+              <ul className="grid gap-[10px] grid-cols-[repeat(8,1fr)] justify-start">
                 {popularList.map((el) => (
                   <MovieCard key={el.id} {...el} />
                 ))}
