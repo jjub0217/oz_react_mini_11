@@ -11,26 +11,9 @@ function App() {
   const [popularList, setPopularList] = useState([]);
   const [sortedList, setSortedList] = useState([]);
 
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_TMDB_V4_TOKEN}`,
-    },
-  };
-
   const { isLoading, results } = useFetch(
-    `${API_URL}/movie/popular?language=ko-KR&page=1`,
-    options
+    `${API_URL}/movie/popular?language=ko-KR&page=1`
   );
-
-  useEffect(() => {
-    // useFetch;
-    // const original = movieListData.results;
-    // const sorted = [...data].sort((a, b) => b.popularity - a.popularity);
-    // setOriginalList(original);
-    // setSortedList(sorted);
-  }, []);
 
   useEffect(() => {
     if (results.length !== 0) {
@@ -48,7 +31,10 @@ function App() {
             element={<Main popularList={popularList} sortedList={sortedList} />}
           />
           {/* <Route path="/" element={<App IMAGE_BASE_URL={IMAGE_BASE_URL} />} /> */}
-          <Route path={`/detail/:id`} element={<MovieDetail />} />
+          <Route
+            path={`/detail/:id`}
+            element={<MovieDetail popularList={popularList} />}
+          />
         </Route>
       </Routes>
     </>
