@@ -9,7 +9,7 @@ export const Main = ({ popularList }) => {
       ) : (
         <>
           <section className="section-popular">
-            <MoviePopular sortedList={sortedList} />
+            <MoviePopular popularList={popularList} />
           </section>
           <section>
             <div className="inner">
