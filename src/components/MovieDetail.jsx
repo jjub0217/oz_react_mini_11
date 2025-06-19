@@ -34,7 +34,7 @@ export const MovieDetail = ({ popularList }) => {
 
   return (
     <section className="max-w-screen-lg h-[calc(100vh-60px)] justify-center text-[#fff]">
-      <div className="flex gap-[20px]">
+      <div className="flex gap-[20px] w-[100%]">
         <div className="pb-[calc((185/350)*100%)] w-[350px] relative">
           {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
           <img
