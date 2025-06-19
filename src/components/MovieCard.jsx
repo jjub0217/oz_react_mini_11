@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { IMAGE_BASE_URL } from "../constant/imageBaseUrl";
 
 const CardContainer = styled(({ isSwiper, viewportWidth, ...rest }) => (
   <div {...rest} />
@@ -27,14 +28,14 @@ const CardContainer = styled(({ isSwiper, viewportWidth, ...rest }) => (
     }
   }
 `;
-export const MovieCard = (props) => {
+
+export const MovieCard = memo((props) => {
   const {
     title,
     vote_average,
     backdrop_path,
     poster_path,
     id: movieId,
-    IMAGE_BASE_URL,
     isSwiper = false,
   } = props;
 
@@ -82,4 +83,4 @@ export const MovieCard = (props) => {
       )}
     </CardContainer>
   );
-};
+});
