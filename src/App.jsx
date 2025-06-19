@@ -10,7 +10,7 @@ import useFetch from "./hooks/useFetch";
 function App() {
   const [popularList, setPopularList] = useState([]);
 
-  const { isLoading, results } = useFetch(
+  const { results } = useFetch(
     `${API_URL}/movie/popular?language=ko-KR&page=1`
   );
 
@@ -20,6 +20,8 @@ function App() {
       setPopularList(popularMovieList);
     }
   }, [results]);
+
+  console.log(results);
 
   return (
     <>
