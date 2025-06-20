@@ -18,7 +18,8 @@ body.light {
   gap: 20px;
 }
 
-.main-movie__list {
+.main-movie__list,
+.movie-search__list {
   display: grid;
   gap: 60px 15px;
   grid-template-columns: repeat(9, 1fr);
@@ -37,6 +38,7 @@ body.light {
     height: 70%;
   }
 }
+
 .movie-poster {
   border-radius: 0.5rem;
   img {
