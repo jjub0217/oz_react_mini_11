@@ -49,8 +49,8 @@ body.light {
 .movie-rating::before {
   content: "";
   display: block;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   background: url("../public/images/star.png") no-repeat;
   background-size: cover;
 }
@@ -119,8 +119,12 @@ body.light {
 
   .movie-title {
     line-height: 1;
-    font-size: 16px;
+    font-size: 30px;
     font-weight: 500;
+  }
+  .movie-rating::before {
+    width: 20px;
+    height: 20px;
   }
   .movie-rating,
   .movie-release {
@@ -132,15 +136,16 @@ body.light {
   .movie-rating {
     align-items: center;
     gap: 5px;
+    font-size: 20px;
   }
   .movie-detail__meta {
     display: flex;
-    gap: 5px;
+    gap: 10px;
   }
   .movie-release,
   .movie-detail__runtime,
   .movie-detail__genres {
-    font-size: 10px;
+    font-size: 17px;
     line-height: 1;
     color: gray;
   }
@@ -157,7 +162,7 @@ body.light {
   }
 
   &__overview {
-    font-size: 10px;
+    font-size: 16px;
     text-align: left;
   }
 }
