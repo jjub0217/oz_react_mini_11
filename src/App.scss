@@ -13,7 +13,6 @@ body.light {
 }
 
 .inner {
-  max-width: 1920px;
   margin: 0 auto;
   padding: 0 5vw;
   gap: 20px;
@@ -206,8 +205,8 @@ body.light {
 
   &::after {
     content: "";
-    width: 3px;
-    height: 3px;
+    width: 10px;
+    height: 10px;
     background: #6201e0;
   }
 }
@@ -215,13 +214,13 @@ body.light {
 .util-link {
   background: #6201e0;
   font-size: 10px;
-  padding: 5px 7px;
+  padding: 10px;
   border-radius: 50%;
   &:after {
     content: "";
     display: block;
-    width: 13px;
-    height: 13px;
+    width: 23px;
+    height: 23px;
     background: url("../public/images/user.png") no-repeat;
     background-size: cover;
   }
@@ -236,8 +235,8 @@ body.light {
     position: absolute;
     right: 0;
     bottom: 3px;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background: url("../public/images/Ico_search.png") no-repeat center / cover;
   }
 }
