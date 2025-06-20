@@ -1,28 +1,18 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IMAGE_BASE_URL } from "../constant/imageBaseUrl";
 
-const CardContainer = styled(({ isSwiper, viewportWidth, ...rest }) => (
-  <div {...rest} />
-))`
+const CardContainer = styled(({ isSwiper, ...rest }) => <div {...rest} />)`
   cursor: pointer;
-  width: ${({ isSwiper, viewportWidth }) =>
-    isSwiper ? `${viewportWidth * (195 / 900)}px` : "10vw"};
-  @media (max-width: 768px) {
-    width: ${({ isSwiper }) => (isSwiper ? "160px" : "40vw")};
-  }
   .movie-poster {
     overflow: hidden;
     width: 100%;
-    width: ${(isSwiper) => (isSwiper ? "auto" : "20vw")};
-
-    min-width: ${({ isSwiper, viewportWidth }) =>
-      isSwiper ? `${viewportWidth * (900 / 1719)}px` : ""};
-
+    position: relative;
+    padding-bottom: calc((360 / 240) * 100%);
     img {
-      position: ${(props) => (props.isSwiper ? "absolute" : "")};
-      top: ${(props) => (props.isSwiper ? "0" : "")};
+      position: absolute;
+      top: 0;
     }
   }
 `;
@@ -43,20 +33,9 @@ export const MovieCard = memo((props) => {
   const handleToDetail = () => {
     navigate(`/detail/${movieId}`);
   };
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setViewportWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
-    <CardContainer
-      onClick={handleToDetail}
-      isSwiper={isSwiper}
-      viewportWidth={viewportWidth}
-    >
+    <CardContainer onClick={handleToDetail} isSwiper={isSwiper}>
       <div className="movie-poster">
         {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
         <img
@@ -71,8 +50,8 @@ export const MovieCard = memo((props) => {
         />
       </div>
       {isSwiper ? null : (
-        <div className="flex flex-col gap-[10px] items-start py-[15px]">
-          <h2 className="leading-none font-[500] text-[#fff] text-[13px] text-left">
+        <div className="flex flex-col gap-[10px] items-start pt-[15px]">
+          <h2 className="leading-none font-[500] text-[13px] text-left">
             {title}
           </h2>
           <p className="flex justify-between w-full leading-none text-[11px] text-[gray]">
