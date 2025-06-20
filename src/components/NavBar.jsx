@@ -49,13 +49,18 @@ export default function NavBar() {
           {/* <Link to="" className="util-link">
             회원가입
           </Link> */}
-        </div>
-        <div className="flex gap-[10px] items-center">
-          <button
-            onClick={toggleTheme}
-            className="util-link bg-[#333] text-[10px]"
-          >
-            {isDark ? "🌙 다크" : "☀️ 라이트"}
+          <button onClick={toggleTheme} className=" bg-[#333] text-[10px]">
+            {isDark ? (
+              <div className="flex items-center">
+                <span>🌙</span>
+                <span>다크 모드</span>
+              </div>
+            ) : (
+              <div className="flex items-center">
+                <span>☀️</span>
+                <span>라이트 모드</span>
+              </div>
+            )}
           </button>
         </div>
       </div>
