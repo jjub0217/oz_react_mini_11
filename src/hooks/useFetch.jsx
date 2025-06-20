@@ -29,6 +29,6 @@ const useFetch = (url) => {
   useEffect(() => {
     if (url) getData();
   }, [url]);
-  return { isLoading, results: data?.results ?? [], error };
+  return { isLoading, data, error };
 };
 export default useFetch;
