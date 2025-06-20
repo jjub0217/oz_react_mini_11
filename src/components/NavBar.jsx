@@ -28,11 +28,11 @@ export default function NavBar() {
 
   return (
     <nav className="">
-      <div className="inner flex h-[42px] justify-between items-center">
+      <div className="inner flex h-[74px] justify-between items-center">
         <h1 className="font-semibold">
           <Link to="/" className="flex items-center">
-            <span className="font-Pixgamer text-[23px] font-black">OZ</span>
-            <span className="logo">무비</span>
+            <span className="font-Pixgamer text-[40px] font-black">OZ</span>
+            <span className="logo text-[40px] max-[480px]:hidden">무비</span>
           </Link>
         </h1>
         <div className="search-box w-[50%]">
@@ -49,14 +49,17 @@ export default function NavBar() {
           {/* <Link to="" className="util-link">
             회원가입
           </Link> */}
-          <button onClick={toggleTheme} className=" bg-[#333] text-[10px]">
+          <button
+            onClick={toggleTheme}
+            className=" bg-[#333] text-[16px] rounded-[12px] px-[20px]"
+          >
             {isDark ? (
-              <div className="flex items-center">
+              <div className="flex items-center gap-[5px]">
                 <span>🌙</span>
                 <span>다크 모드</span>
               </div>
             ) : (
-              <div className="flex items-center">
+              <div className="flex items-center gap-[5px] ">
                 <span>☀️</span>
                 <span>라이트 모드</span>
               </div>
