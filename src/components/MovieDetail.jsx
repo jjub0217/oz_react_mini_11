@@ -45,11 +45,9 @@ export const MovieDetail = () => {
               <span className="movie-release">
                 {movieDetail.release_date.slice(0, 4)}
               </span>
-
               <span className="movie-detail__runtime">
                 {movieDetail.runtime}분
               </span>
-
               <div className="movie-detail__genres">
                 {movieDetail.genres.map((el) => (
                   <span key={el.id} className="movie-detail__genre">
