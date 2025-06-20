@@ -1,7 +1,7 @@
 import { MovieCard } from "./MovieCard";
-import { MoviePopular } from "./MoviePopular";
+import { MovieTop } from "./MovieTop";
 
-export const Main = ({ popularList }) => {
+export const Main = ({ popularList, topMovieList }) => {
   return (
     <main>
       {popularList.length === 0 ? (
@@ -9,14 +9,14 @@ export const Main = ({ popularList }) => {
       ) : (
         <>
           <section className="section-popular">
-            <MoviePopular popularList={popularList} />
+            <MovieTop topMovieList={topMovieList} />
           </section>
           <section>
             <div className="inner">
               <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px] text-left">
                 새로 올라온 영화
               </h2>
-              <ul className="grid gap-[10px] grid-cols-[repeat(8,1fr)] justify-start">
+              <ul className="flex flex-wrap gap-[10px] justify-start">
                 {popularList.map((el) => (
                   <MovieCard key={el.id} {...el} />
                 ))}
