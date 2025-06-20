@@ -18,12 +18,12 @@ export const MovieSearch = ({ popularList }) => {
   }, [param]);
 
   return (
-    <section>
+    <section className="movie-search">
       <div className="inner">
         {searchedList.length === 0 ? (
           <NoSearchValue param={param} />
         ) : (
-          <ul className="grid gap-[10px] grid-cols-[repeat(8,1fr)] justify-start">
+          <ul className="movie-search__list">
             {searchedList.map((el) => (
               <MovieCard key={el.id} {...el} />
             ))}
