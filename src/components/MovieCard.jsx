@@ -50,13 +50,13 @@ export const MovieCard = memo((props) => {
         />
       </div>
       {isSwiper ? null : (
-        <div className="flex flex-col gap-[10px] items-start pt-[15px]">
-          <h2 className="leading-none font-[500] text-[13px] text-left">
+        <div className="flex flex-col gap-[15px] items-start pt-[15px]">
+          <h2 className="leading-none font-[500] text-[20px] text-left">
             {title}
           </h2>
-          <p className="flex justify-between w-full leading-none text-[11px] text-[gray]">
-            <span>{release_date.slice(0, 4)}</span>
-            <span className="movie-rating flex gap-[5px]">
+          <p className="flex justify-between w-full leading-none text-[gray]">
+            <span className="text-[18px]">{release_date.slice(0, 4)}</span>
+            <span className="movie-rating flex gap-[5px] text-[18px]">
               {Number(vote_average).toFixed(1)}
             </span>
           </p>
