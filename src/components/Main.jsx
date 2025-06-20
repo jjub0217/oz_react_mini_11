@@ -13,7 +13,7 @@ export const Main = ({ popularList, topMovieList }) => {
           </section>
           <section className="">
             <div className="inner">
-              <h2 className="text-[#fff] font-bold text-[1.1rem] mb-[10px] text-left">
+              <h2 className="font-bold text-[1.1rem] mb-[10px] text-left">
                 새로 올라온 영화
               </h2>
               <ul className="main-movie__list">
