@@ -236,6 +236,10 @@ body.light {
   display: flex;
   position: relative;
 
+  input {
+    font-size: 20px;
+  }
+
   &::after {
     content: "";
     position: absolute;
