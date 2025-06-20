@@ -32,7 +32,7 @@ export default function NavBar() {
         <h1 className="font-semibold">
           <Link to="/" className="flex items-center">
             <span className="font-Pixgamer text-[40px] font-black">OZ</span>
-            <span className="logo text-[40px] max-[480px]:hidden">무비</span>
+            <span className="logo text-[25px] max-[480px]:hidden">무비</span>
           </Link>
         </h1>
         <div className="search-box w-[50%]">
