@@ -20,7 +20,7 @@ body.light {
 
 .main-movie__list {
   display: grid;
-  gap: 10px;
+  gap: 60px 15px;
   grid-template-columns: repeat(9, 1fr);
 
   @media screen and (max-width: 1024px) {
