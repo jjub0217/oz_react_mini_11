@@ -36,12 +36,10 @@ export default function NavBar() {
           />
         </div>
         <div className="flex gap-[10px]">
-          <Link to="" className="util-link">
-            로그인
-          </Link>
-          <Link to="" className="util-link">
+          <Link to="" className="util-link" />
+          {/* <Link to="" className="util-link">
             회원가입
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>
