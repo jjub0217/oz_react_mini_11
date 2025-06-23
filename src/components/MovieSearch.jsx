@@ -18,7 +18,7 @@ export const MovieSearch = ({ popularList }) => {
   }, [param]);
 
   return (
-    <section className="movie-search">
+    <section className="movie-search mt-[6rem] max-[1024px]:mt-[4rem] max-[768px]:mt-[3rem]">
       <div className="inner">
         {searchedList.length === 0 ? (
           <NoSearchValue param={param} />
