@@ -2,30 +2,73 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Layout from "./components/Layout";
+import { Login } from "./components/Login";
 import { Main } from "./components/Main";
 import { MovieDetail } from "./components/MovieDetail";
 import { MovieSearch } from "./components/MovieSearch";
+import { SisunZip } from "./components/Sisunzip";
 import { API_URL } from "./constant/imageBaseUrl";
 import useFetch from "./hooks/useFetch";
 
 function App() {
   const [popularList, setPopularList] = useState([]);
   const [topMovieList, setTopMovieList] = useState([]);
+  const [playingMovieList, setPlayingMovieList] = useState([]);
+  const [upComingMovieList, setUpComingMovieList] = useState([]);
+  const [trendingPeopleList, setTrendingPeopleList] = useState([]);
 
-  const { data } = useFetch(`${API_URL}/movie/popular?language=ko-KR&page=1`);
-  const { data: topList } = useFetch(
+  const { data: popularData } = useFetch(
+    `${API_URL}/movie/popular?language=ko&page=1`
+  );
+  const { data: topData } = useFetch(
     `${API_URL}/movie/top_rated?language=en-US&page=1`
+  );
+  const { data: playingList } = useFetch(
+    `${API_URL}/movie/now_playing?language=ko&page=1`
+  );
+  const { data: upComingList } = useFetch(
+    `${API_URL}/movie/upcoming?language=ko&page=1`
+  );
+  const { data: trendingData } = useFetch(
+    `${API_URL}/person/popular?language=ko&page=1`
   );
 
   useEffect(() => {
-    if (!data || !data.results || !topList || !topList.results) return;
-    const popularMovieList = data.results.filter((el) => el.adult === false);
-    setPopularList(popularMovieList);
-    const topRatedMovieList = topList.results.filter(
-      (el) => el.adult === false
-    );
-    setTopMovieList(topRatedMovieList);
-  }, [data, topList]);
+    if (topData?.results) {
+      setTopMovieList(topData.results.filter((el) => !el.adult));
+    }
+  }, [topData]);
+
+  useEffect(() => {
+    if (popularData?.results) {
+      setPopularList(popularData.results.filter((el) => !el.adult));
+    }
+  }, [popularData]);
+
+  useEffect(() => {
+    if (playingList?.results) {
+      setPlayingMovieList(playingList.results.filter((el) => !el.adult));
+    }
+  }, [playingList]);
+
+  useEffect(() => {
+    if (upComingList?.results) {
+      setUpComingMovieList(upComingList.results.filter((el) => !el.adult));
+    }
+  }, [upComingList]);
+
+  useEffect(() => {
+    if (trendingData?.results) {
+      const list = trendingData.results.filter(
+        (el) =>
+          !el.adult &&
+          el.known_for_department !== null &&
+          el.known_for.length !== 0
+      );
+
+      setTrendingPeopleList(list.filter((el) => el.profile_path));
+    }
+  }, [trendingData]);
 
   return (
     <>
@@ -34,7 +77,13 @@ function App() {
           <Route
             index
             element={
-              <Main popularList={popularList} topMovieList={topMovieList} />
+              <Main
+                popularList={popularList}
+                topMovieList={topMovieList}
+                playingMovieList={playingMovieList}
+                upComingMovieList={upComingMovieList}
+                trendingPeopleList={trendingPeopleList}
+              />
             }
           />
           <Route path={`/detail/:id`} element={<MovieDetail />} />
@@ -42,6 +91,8 @@ function App() {
             path={`/search`}
             element={<MovieSearch popularList={popularList} />}
           />
+          <Route path={`/sisunzip`} element={<SisunZip />} />
+          <Route path={`/login`} element={<Login />} />
         </Route>
       </Routes>
     </>
