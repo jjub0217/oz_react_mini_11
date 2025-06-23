@@ -357,6 +357,13 @@ body.light {
   font-size: 10px;
   padding: 10px;
   border-radius: 50%;
+  @media screen and (max-width: 768px) {
+    &::after {
+      width: 13px;
+      height: 13px;
+    }
+    grid-template-columns: repeat(4, 1fr);
+  }
   &:after {
     content: "";
     display: block;

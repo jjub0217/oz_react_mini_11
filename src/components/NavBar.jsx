@@ -53,12 +53,10 @@ export default function NavBar() {
             {isDark ? (
               <div className="flex items-center gap-[5px]">
                 <span>🌙</span>
-                <span>다크 모드</span>
               </div>
             ) : (
               <div className="flex items-center gap-[5px] ">
                 <span>☀️</span>
-                <span>라이트 모드</span>
               </div>
             )}
           </button>
