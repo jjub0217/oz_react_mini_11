@@ -14,6 +14,7 @@ const useFetch = (url) => {
   };
 
   const getData = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(url, options);
       if (!res.ok) throw new Error("데이터를 가져오는 데 실패했습니다.");
