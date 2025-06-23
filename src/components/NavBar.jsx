@@ -28,11 +28,11 @@ export default function NavBar() {
 
   return (
     <nav className="">
-      <div className="inner flex h-[74px] justify-between items-center">
+      <div className="inner flex h-[74px] justify-between items-center px-[5vw]">
         <h1 className="font-semibold">
           <Link to="/" className="flex items-center">
-            <span className="font-Pixgamer text-[40px] font-black">OZ</span>
-            <span className="logo text-[25px] max-[480px]:hidden">무비</span>
+            <span className="font-Pixgamer text-[2.4rem] font-black">OZ</span>
+            <span className="logo text-[1.5rem] max-[480px]:hidden">무비</span>
           </Link>
         </h1>
         <div className="search-box w-[50%]">
@@ -45,13 +45,10 @@ export default function NavBar() {
           />
         </div>
         <div className="flex gap-[10px]">
-          <Link to="" className="util-link" />
-          {/* <Link to="" className="util-link">
-            회원가입
-          </Link> */}
+          <Link to={`/login`} className="util-link" />
           <button
             onClick={toggleTheme}
-            className=" bg-[#333] text-[16px] rounded-[12px] px-[20px]"
+            className="bg-[#333] text-[16px] rounded-[12px] px-[20px]"
           >
             {isDark ? (
               <div className="flex items-center gap-[5px]">
