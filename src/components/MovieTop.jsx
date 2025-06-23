@@ -10,7 +10,7 @@ export function MovieTop({ topMovieList }) {
     <Swiper
       loop={true}
       centeredSlides={true}
-      spaceBetween={10}
+      spaceBetween={20}
       modules={[Autoplay, Navigation, Pagination]}
       slidesPerView="auto"
       navigation={true}
