@@ -1,69 +1,90 @@
-const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { API_URL } from "../constant/imageBaseUrl";
-import useFetchGenres from "../hooks/useFetchGenres";
+import { getTabs } from "../constant/getTabs";
+import { API_URL, IMAGE_BASE_URL } from "../constant/imageBaseUrl";
+import useFetch from "../hooks/useFetch";
+import { CommentContent } from "./CommentContent";
+import { MovieDetailTabs } from "./MovieDetailTab";
+import { RecommendContent } from "./RecommendContent";
 import { SkeletonDetail } from "./SkeletonDetail";
 
-export const MovieDetail = ({ popularList }) => {
+export const MovieDetail = () => {
   const { id } = useParams();
-  const [detail, setDetail] = useState(null);
+  const { data: movieDetail } = useFetch(`${API_URL}/movie/${id}?language=ko`);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [matchedGenres, setMatchedGenres] = useState([]);
+  const [activeTab, setActiveTab] = useState("comments");
 
-  const { results: genreList, isLoading: genreLoading } = useFetchGenres(
-    `${API_URL}/genre/movie/list?language=ko`
+  const { data: detailInfo } = useFetch(
+    `${API_URL}/movie/${id}/reviews?language=en-US&page=1`
   );
 
-  useEffect(() => {
-    if (popularList.length == 0 || genreList.length === 0) return;
-    const detailMovie = popularList.find((el) => el.id === Number(id));
-    setDetail(detailMovie);
+  const commentList = detailInfo?.results ?? [];
+  const commentCount = detailInfo?.results?.length ?? 0;
+  const tabs = getTabs(commentCount);
 
-    if (detailMovie) {
-      const matchedGenre = genreList.filter((genre) =>
-        detailMovie.genre_ids.includes(genre.id)
-      );
-      setMatchedGenres(matchedGenre);
-    }
-  }, [id, popularList, genreList]);
-
-  if (!detail || genreLoading) {
+  if (!movieDetail) {
     return <SkeletonDetail />;
   }
 
   return (
-    <section className="max-w-screen-lg h-[calc(100vh-60px)] justify-center text-[#fff]">
-      <div className="flex gap-[20px] w-[100%]">
-        <div className="pb-[calc((185/350)*100%)] w-[350px] relative">
-          {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
-          <img
-            src={`${IMAGE_BASE_URL}${detail.poster_path}`}
-            alt={detail.title}
-            onLoad={() => setIsLoaded(true)}
-            style={{ display: isLoaded ? "block" : "none" }}
-            className="object-cover absolute top-0 w-[100%] h-[100%]"
-          />
-        </div>
-        <div className="flex-1 flex flex-col gap-[20px]">
-          <div className="flex justify-between">
-            <h2 className="leading-none font-[500] text-[16px]">
-              {detail.title}
-            </h2>
-            <p className="leading-none text-[13px] text-[gray]">
-              평점: {detail.vote_average}
-            </p>
+    <div className="mt-[2rem]">
+      <section className="movie-detail">
+        <div className="inner">
+          <div className="movie-poster">
+            {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
+            <img
+              src={`${IMAGE_BASE_URL.backdrop}${movieDetail.backdrop_path}`}
+              alt={movieDetail.title}
+              onLoad={() => setIsLoaded(true)}
+              style={{ display: isLoaded ? "block" : "none" }}
+            />
           </div>
-          <div className="flex gap-[5px]">
-            {matchedGenres.map((el) => (
-              <span key={el.id} className="text-[13px]">
-                {el.name}
+          <div className="movie-detail__info">
+            <div className="movie-detail__title-box">
+              <h2 className="movie-title">{movieDetail.title}</h2>
+              <span className="movie-rating">
+                {Number(movieDetail.vote_average).toFixed(1)}
               </span>
-            ))}
+            </div>
+            <div className="movie-detail__meta">
+              <span className="movie-release">
+                {movieDetail.release_date.slice(0, 4)}
+              </span>
+              <span className="movie-detail__runtime">
+                {movieDetail.runtime}분
+              </span>
+              <div className="movie-detail__genres">
+                {movieDetail.genres.map((el) => (
+                  <span key={el.id} className="movie-detail__genre">
+                    {el.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <p className="movie-detail__overview">{movieDetail.overview}</p>
           </div>
-          <p className="text-[13px] text-left">{detail.overview}</p>
         </div>
-      </div>
-    </section>
+      </section>
+      <section className="movie-tab__info pb-[80px] max-[768px]:px-[5vw]">
+        <div className="inner text-left w-full">
+          <MovieDetailTabs setActiveTab={setActiveTab} tabs={tabs} id={id} />
+          <div className="movie-tabs-content">
+            <div
+              style={{ display: activeTab === "comments" ? "block" : "none" }}
+            >
+              <CommentContent
+                detailInfo={commentList}
+                commentCount={commentCount}
+              />
+            </div>
+            <div
+              style={{ display: activeTab === "recommend" ? "block" : "none" }}
+            >
+              <RecommendContent id={id} />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };

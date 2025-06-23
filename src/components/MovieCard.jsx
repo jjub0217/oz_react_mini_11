@@ -1,30 +1,18 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IMAGE_BASE_URL } from "../constant/imageBaseUrl";
 
-const CardContainer = styled(({ isSwiper, viewportWidth, ...rest }) => (
-  <div {...rest} />
-))`
+const CardContainer = styled(({ isSwiper, ...rest }) => <div {...rest} />)`
   cursor: pointer;
-  .image_box {
-    position: relative;
+  .movie-poster {
     overflow: hidden;
     width: 100%;
-    height: ${(props) => (props.isSwiper ? "" : "23vh")};
-    border-radius: 5px;
-
-    min-width: ${({ isSwiper, viewportWidth }) =>
-      isSwiper ? `${viewportWidth * (900 / 1719)}px` : "auto"};
-    padding-bottom: ${({ isSwiper, viewportWidth }) =>
-      isSwiper ? `${viewportWidth * (195 / 900)}px` : "0"};
-
+    position: relative;
+    padding-bottom: calc((360 / 240) * 100%);
     img {
-      position: ${(props) => (props.isSwiper ? "absolute" : "")};
-      top: ${(props) => (props.isSwiper ? "0" : "")};
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      position: absolute;
+      top: 0;
     }
   }
 `;
@@ -35,6 +23,7 @@ export const MovieCard = memo((props) => {
     vote_average,
     backdrop_path,
     poster_path,
+    release_date,
     id: movieId,
     isSwiper = false,
   } = props;
@@ -42,42 +31,45 @@ export const MovieCard = memo((props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
   const handleToDetail = () => {
+    window.scrollTo({ top: 0, behavior: "auto" });
     navigate(`/detail/${movieId}`);
   };
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setViewportWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
-    <CardContainer
-      onClick={handleToDetail}
-      isSwiper={isSwiper}
-      viewportWidth={viewportWidth}
-    >
-      <div className="image_box">
+    <CardContainer onClick={handleToDetail} isSwiper={isSwiper}>
+      <div className="movie-poster">
         {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
         <img
           src={
             isSwiper
-              ? `${IMAGE_BASE_URL}${backdrop_path}}`
-              : `${IMAGE_BASE_URL}${poster_path}`
+              ? `${IMAGE_BASE_URL.backdrop}${backdrop_path}}`
+              : `${IMAGE_BASE_URL.poster}${poster_path}`
           }
           alt={title}
           onLoad={() => setIsLoaded(true)}
-          style={{ display: isLoaded ? "block" : "none" }}
+          style={{
+            visibility: isLoaded ? "visible" : "hidden",
+            width: "100%",
+            height: "100%",
+          }}
         />
       </div>
       {isSwiper ? null : (
-        <div className="flex flex-col gap-[10px] items-start py-[15px]">
-          <h2 className="leading-none font-[500] text-[#fff] text-[13px]">
+        <div className="flex flex-col gap-[15px] items-start pt-[15px] max-[768px]:hidden">
+          <h2
+            className={`${title} ? leading-none font-[500] text-[20px] max-[1700px]:text-[18px] max-[1024px]:text-[1rem] max-[820px]:text-[16px] max-[420px]:text-[16px] text-left
+          : h-[20px] max-[1700px]:h-[18px] max-[1024px]:h-[1rem] max-[820px]:h-[16px] max-[420px]:h-[16px]
+          `}
+          >
             {title}
           </h2>
-          <p className="leading-none text-[11px] text-[gray]">
-            평점: {vote_average}
+          <p className="flex justify-between w-full leading-none text-[gray]">
+            <span className="text-[18px] max-[1700px]:text-[16px] max-[820px]:text-[14px] max-[420px]:text-[14px]">
+              {release_date ? release_date.slice(0, 4) : "개봉일 미정"}
+            </span>
+            <span className="movie-rating flex gap-[5px] text-[18px] max-[1700px]:text-[16px] max-[820px]:text-[14px] max-[420px]:text-[14px]">
+              {Number(vote_average).toFixed(1)}
+            </span>
           </p>
         </div>
       )}
