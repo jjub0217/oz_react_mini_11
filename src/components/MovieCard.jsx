@@ -31,6 +31,7 @@ export const MovieCard = memo((props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
   const handleToDetail = () => {
+    window.scrollTo({ top: 0, behavior: "auto" });
     navigate(`/detail/${movieId}`);
   };
 
@@ -41,22 +42,32 @@ export const MovieCard = memo((props) => {
         <img
           src={
             isSwiper
-              ? `${IMAGE_BASE_URL}${backdrop_path}}`
-              : `${IMAGE_BASE_URL}${poster_path}`
+              ? `${IMAGE_BASE_URL.backdrop}${backdrop_path}}`
+              : `${IMAGE_BASE_URL.poster}${poster_path}`
           }
           alt={title}
           onLoad={() => setIsLoaded(true)}
-          style={{ display: isLoaded ? "block" : "none" }}
+          style={{
+            visibility: isLoaded ? "visible" : "hidden",
+            width: "100%",
+            height: "100%",
+          }}
         />
       </div>
       {isSwiper ? null : (
-        <div className="flex flex-col gap-[15px] items-start pt-[15px]">
-          <h2 className="leading-none font-[500] text-[20px] text-left">
+        <div className="flex flex-col gap-[15px] items-start pt-[15px] max-[768px]:hidden">
+          <h2
+            className={`${title} ? leading-none font-[500] text-[20px] max-[1700px]:text-[18px] max-[1024px]:text-[1rem] max-[820px]:text-[16px] max-[420px]:text-[16px] text-left
+          : h-[20px] max-[1700px]:h-[18px] max-[1024px]:h-[1rem] max-[820px]:h-[16px] max-[420px]:h-[16px]
+          `}
+          >
             {title}
           </h2>
           <p className="flex justify-between w-full leading-none text-[gray]">
-            <span className="text-[18px]">{release_date.slice(0, 4)}</span>
-            <span className="movie-rating flex gap-[5px] text-[18px]">
+            <span className="text-[18px] max-[1700px]:text-[16px] max-[820px]:text-[14px] max-[420px]:text-[14px]">
+              {release_date ? release_date.slice(0, 4) : "개봉일 미정"}
+            </span>
+            <span className="movie-rating flex gap-[5px] text-[18px] max-[1700px]:text-[16px] max-[820px]:text-[14px] max-[420px]:text-[14px]">
               {Number(vote_average).toFixed(1)}
             </span>
           </p>
