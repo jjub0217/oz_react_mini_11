@@ -1,13 +1,12 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { useOAuth } from "../hooks/useOAuth";
+import { Link, useNavigate } from "react-router-dom";
+import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
 import { getErrorMessage, validateField } from "../utils/validation";
 import { InputField } from "./InputField";
 
 export const Login = () => {
   const loginForm = useRef();
-  const emailInput = useRef(null);
+  const navigate = useNavigate();
 
   const [loginUserInfo, setLoginUserInfo] = useState({
     email: "",
@@ -19,10 +18,7 @@ export const Login = () => {
     password: "",
   });
 
-  const [signupError, setSignupError] = useState("");
-
-  const { Login, isLoading, authError } = useAuth();
-  const { loginWithKakao, loginWithGoogle } = useOAuth();
+  const { Login, loginWithKakao, loginWithGoogle } = useSupabaseAuth();
 
   const requestLogin = async (e) => {
     e.preventDefault();
@@ -31,10 +27,8 @@ export const Login = () => {
     const { email, password } = loginUserInfo;
     const { data, error } = await Login({ email, password });
     console.log("✅ 로그인 응답:", data, error);
-    if (error) {
-      setSignupError(error.message);
-    } else {
-      alert("로그인이 완료되었습니다");
+    if (!error) {
+      navigate("/");
     }
   };
 
@@ -73,7 +67,6 @@ export const Login = () => {
               errorType.password
             )}
           />
-          {signupError && <p className="text-[red] text-sm">{signupError}</p>}
           <button>로그인</button>
           <div>
             <p>OZ무비가 처음이신가요?</p>
@@ -97,7 +90,6 @@ export const Login = () => {
             Google로 로그인
           </button>
         </form>
-        {/* </form> */}
       </div>
     </main>
   );
