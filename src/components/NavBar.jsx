@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useDebounce from "../hooks/useDebounce";
+import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
 
 export default function NavBar() {
   const [inputValue, setInputValue] = useState("");
   const [isDark, setIsDark] = useState(true);
-  const [isLogged, setIsLogged] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
   const navigate = useNavigate();
   const navigateDebounce = useDebounce();
+
+  const { logout, user } = useSupabaseAuth();
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
@@ -25,6 +27,15 @@ export default function NavBar() {
 
   const handleLogin = () => {
     navigate("/login");
+  };
+
+  const requestLogOut = async (e) => {
+    e.preventDefault();
+    const { error } = await logout();
+    if (!error) {
+      setIsHovering(false);
+      navigate("/");
+    }
   };
 
   useEffect(() => {
@@ -45,8 +56,6 @@ export default function NavBar() {
           className={`parent flex gap-[10px] items-center  ${
             isHovering ? "relative" : ""
           }`}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
         >
           <div className="search-box">
             <input
@@ -68,20 +77,39 @@ export default function NavBar() {
               </div>
             )}
           </button>
-          {isLogged ? (
-            <div>
-              <button className="log util-link"></button>
+          {user ? (
+            <div
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <div className="log util-link"></div>
               <div
                 className={`child ${
                   isHovering ? "flex" : "hidden"
                 } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
               >
                 <p>관심목록</p>
-                <p>로그아웃</p>
+                <button type="button" onClick={requestLogOut}>
+                  로그아웃
+                </button>
               </div>
             </div>
           ) : (
-            <button className="util-link" onClick={handleLogin}></button>
+            <div
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <div className="util-link"></div>
+              <div
+                className={`child ${
+                  isHovering ? "flex" : "hidden"
+                } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
+              >
+                <button type="button" onClick={handleLogin}>
+                  로그인
+                </button>
+              </div>
+            </div>
           )}
           {/* <Link to={`/login`} className="" /> */}
         </div>
