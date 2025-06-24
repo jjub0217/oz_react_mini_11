@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import useAuth from "../hooks/useAuth";
+import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
 import { getErrorMessage, validateField } from "../utils/validation";
 import { InputField } from "./InputField";
 
 export const SignUp = () => {
   const formRef = useRef();
-  const { signUp, isLoading, authError } = useAuth();
+
+  const { signUp } = useSupabaseAuth();
 
   const [userInfo, setUserInfo] = useState({
     email: "",
