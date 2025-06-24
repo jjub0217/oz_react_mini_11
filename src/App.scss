@@ -3,13 +3,28 @@
 }
 
 body.dark {
-  background-color: #000;
-  color: #fff;
+  background-color: #1b1b1b;
+  color: #a5a5a5;
+}
+body {
+  @media screen and (max-width: 1024px) {
+    background-color: #1b1b1b;
+    color: #a5a5a5;
+  }
 }
 
 body.light {
-  background-color: #fff;
+  background-color: #d5d4d4;
   color: #000;
+}
+
+.blind {
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  position: absolute;
 }
 
 .inner {
@@ -402,4 +417,47 @@ body.light {
   50% {
     opacity: 0.5;
   }
+}
+.social-login {
+  margin-top: 50px;
+  font-size: 1.3rem;
+  position: relative;
+
+  &:before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: #464646;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    @media screen and (max-width: 820px) {
+    }
+  }
+  &::before {
+    left: 0;
+  }
+  &::after {
+    right: 0;
+  }
+}
+.kakao-login,
+.google-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 3.7rem;
+  height: 3.7rem;
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+.kakao-login {
+  background: #fee500;
+}
+.google-login {
+  background: #fff;
 }
