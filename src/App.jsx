@@ -6,6 +6,8 @@ import { Login } from "./components/Login";
 import { Main } from "./components/Main";
 import { MovieDetail } from "./components/MovieDetail";
 import { MovieSearch } from "./components/MovieSearch";
+import OAuthCallback from "./components/OAuthCallback";
+import { SignUp } from "./components/SignUp";
 import { SisunZip } from "./components/Sisunzip";
 import { API_URL } from "./constant/imageBaseUrl";
 import useFetch from "./hooks/useFetch";
@@ -93,6 +95,8 @@ function App() {
           />
           <Route path={`/sisunzip`} element={<SisunZip />} />
           <Route path={`/login`} element={<Login />} />
+          <Route path={`/signup`} element={<SignUp />} />
+          <Route path="/oauth/callback" element={<OAuthCallback />} />
         </Route>
       </Routes>
     </>
