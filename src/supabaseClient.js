@@ -5,7 +5,7 @@ const supabaseEnv = {
   apiKey: import.meta.env.VITE_SUPABASE_KEY,
 };
 
-export const supabase = createClient(
+export const supabaseClient = createClient(
   supabaseEnv.projectURL,
   supabaseEnv.apiKey
 );
