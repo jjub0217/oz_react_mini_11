@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
 
-function Layout() {
+function Layout({ isLogged, setIsLogged }) {
   return (
     <>
-      <NavBar />
+      <NavBar isLogged={isLogged} setIsLogged={setIsLogged} />
       <Outlet />
     </>
   );
