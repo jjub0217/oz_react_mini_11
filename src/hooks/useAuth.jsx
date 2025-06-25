@@ -31,8 +31,8 @@ export const useAuth = () => {
       setAuthError(error.message);
     } else {
       console.log("✅ 회원가입 성공");
-      setUser(data.user);
-      setItemToLocalStorage(USER_INFO_KEY, data.user);
+      // setUser(data.user);
+      // setItemToLocalStorage(USER_INFO_KEY, data.user);
     }
 
     setIsLoading(false);
