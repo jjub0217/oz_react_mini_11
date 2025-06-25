@@ -461,3 +461,27 @@ body.light {
 .google-login {
   background: #fff;
 }
+.auth-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  &::before {
+    content: "";
+    display: block;
+    background: url("../public/images/warning.png") no-repeat;
+    background-size: cover;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.welcome {
+  &::before {
+    content: "";
+    display: block;
+    background: url("../public/images/images.png") no-repeat;
+    background-size: cover;
+    width: 30rem;
+    height: 20rem;
+  }
+}
