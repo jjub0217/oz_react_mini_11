@@ -6,6 +6,7 @@ import { InputField } from "./InputField";
 export const Login = () => {
   const loginForm = useRef();
   const navigate = useNavigate();
+  const [authError, setAuthError] = useState("");
 
   const [loginUserInfo, setLoginUserInfo] = useState({
     email: "",
@@ -28,6 +29,8 @@ export const Login = () => {
     console.log("✅ 로그인 응답:", data, error);
     if (!error) {
       navigate("/");
+    } else {
+      setAuthError("이메일 또는 비밀번호가 일치하지 않습니다.");
     }
   };
 
@@ -37,6 +40,7 @@ export const Login = () => {
     setLoginUserInfo(nextUserInfo);
     const error = validateField(name, value, nextUserInfo);
     setErrorType((prev) => ({ ...prev, [name]: error }));
+    setAuthError("");
   };
 
   return (
@@ -54,6 +58,14 @@ export const Login = () => {
             <legend className="text-[1.2rem] mb-[30px] max-[820px]:hidden">
               OZ무비 계정으로 로그인
             </legend>
+            {authError && (
+              <div className="auth-error bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
+                {authError}
+                {/* <button className="text-sm underline ml-2">
+                  비밀번호 재설정
+                </button> */}
+              </div>
+            )}
             <InputField
               label="이메일"
               name="email"
