@@ -75,12 +75,13 @@ export const TrendingPeople = ({ trendingPeopleList }) => {
             <div className="flex gap-[10px] absolute left-[10px] top-[10px] z-[2]">
               {!isDesktop && (
                 <div
-                  className={`flex flex-col gap-[10px] items-center text-[${PEOPLE_COLORS[i]}]`}
+                  className={`flex flex-col gap-[10px] items-center`}
+                  style={{ color: PEOPLE_COLORS[i] }}
                 >
                   {verticalTexts.map((text, idx) => (
                     <div
                       key={idx}
-                      className="flex flex-col items-center gap-[3px]"
+                      className="flex flex-col items-center gap-[3px] "
                     >
                       <span className="item-text flex flex-col flex-wrap items-center">
                         {text.split("").map((char, cIdx) => (
@@ -109,7 +110,8 @@ export const TrendingPeople = ({ trendingPeopleList }) => {
                   {el.name.split("").map((char, idx) => (
                     <span
                       key={idx}
-                      className={`leading-[18px] text-[${PEOPLE_COLORS[i]}]`}
+                      className={`leading-[18px] `}
+                      style={{ color: PEOPLE_COLORS[i] }}
                     >
                       {char}
                     </span>

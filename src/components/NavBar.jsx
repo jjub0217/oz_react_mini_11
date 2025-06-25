@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useDebounce from "../hooks/useDebounce";
+import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
 
 export default function NavBar() {
   const [inputValue, setInputValue] = useState("");
   const [isDark, setIsDark] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
 
   const navigate = useNavigate();
   const navigateDebounce = useDebounce();
+
+  const { logout, user } = useSupabaseAuth();
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
@@ -20,6 +24,19 @@ export default function NavBar() {
   };
 
   const toggleTheme = () => setIsDark((prev) => !prev);
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  const requestLogOut = async (e) => {
+    e.preventDefault();
+    const { error } = await logout();
+    if (!error) {
+      setIsHovering(false);
+      navigate("/");
+    }
+  };
 
   useEffect(() => {
     document.body.classList.toggle("dark", isDark);
@@ -35,31 +52,66 @@ export default function NavBar() {
             <span className="logo text-[1.5rem] max-[480px]:hidden">무비</span>
           </Link>
         </h1>
-        <div className="search-box w-[50%]">
-          <input
-            type="text"
-            name="search"
-            onChange={handleSearch}
-            value={inputValue}
-            className="w-[100%] bg-transparent border-b-[1px] border-[#6201e0] outline-none text-[12px] font-normal pb-[3px]"
-          />
-        </div>
-        <div className="flex gap-[10px]">
-          <Link to={`/login`} className="util-link" />
-          <button
-            onClick={toggleTheme}
-            className="bg-[#333] text-[16px] rounded-[12px] px-[20px]"
-          >
+        <div
+          className={`parent flex gap-[10px] items-center  ${
+            isHovering ? "relative" : ""
+          }`}
+        >
+          <div className="search-box">
+            <input
+              type="text"
+              name="search"
+              onChange={handleSearch}
+              value={inputValue}
+              className="w-[100%] bg-transparent outline-none text-[12px] font-normal pb-[3px]"
+            />
+          </div>
+          <button onClick={toggleTheme} className="rounded-full">
             {isDark ? (
-              <div className="flex items-center gap-[5px]">
-                <span>🌙</span>
+              <div className="p-[10px]">
+                <p className="h-[16px] leading-[16px]">🌙</p>
               </div>
             ) : (
-              <div className="flex items-center gap-[5px] ">
-                <span>☀️</span>
+              <div className="p-[10px]">
+                <p className="h-[16px] leading-[16px]">☀️</p>
               </div>
             )}
           </button>
+          {user ? (
+            <div
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <div className="log util-link"></div>
+              <div
+                className={`child ${
+                  isHovering ? "flex" : "hidden"
+                } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
+              >
+                <p>관심목록</p>
+                <button type="button" onClick={requestLogOut}>
+                  로그아웃
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <div className="util-link"></div>
+              <div
+                className={`child ${
+                  isHovering ? "flex" : "hidden"
+                } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
+              >
+                <button type="button" onClick={handleLogin}>
+                  로그인
+                </button>
+              </div>
+            </div>
+          )}
+          {/* <Link to={`/login`} className="" /> */}
         </div>
       </div>
     </nav>

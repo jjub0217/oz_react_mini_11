@@ -6,8 +6,11 @@ import { Login } from "./components/Login";
 import { Main } from "./components/Main";
 import { MovieDetail } from "./components/MovieDetail";
 import { MovieSearch } from "./components/MovieSearch";
+import OAuthCallback from "./components/OAuthCallback";
+import { SignUp } from "./components/SignUp";
 import { SisunZip } from "./components/Sisunzip";
 import { API_URL } from "./constant/imageBaseUrl";
+import { useAuth } from "./hooks/useAuth";
 import useFetch from "./hooks/useFetch";
 
 function App() {
@@ -16,6 +19,13 @@ function App() {
   const [playingMovieList, setPlayingMovieList] = useState([]);
   const [upComingMovieList, setUpComingMovieList] = useState([]);
   const [trendingPeopleList, setTrendingPeopleList] = useState([]);
+
+  const { getUserInfo } = useAuth();
+
+  useEffect(() => {
+    // 앱 시작 시 LocalStorage에 저장된 유저 정보 → 전역 상태로 저장
+    getUserInfo();
+  }, []);
 
   const { data: popularData } = useFetch(
     `${API_URL}/movie/popular?language=ko&page=1`
@@ -93,6 +103,8 @@ function App() {
           />
           <Route path={`/sisunzip`} element={<SisunZip />} />
           <Route path={`/login`} element={<Login />} />
+          <Route path={`/signup`} element={<SignUp />} />
+          <Route path="/oauth/callback" element={<OAuthCallback />} />
         </Route>
       </Routes>
     </>

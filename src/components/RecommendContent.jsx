@@ -12,7 +12,7 @@ export const RecommendContent = ({ id }) => {
   const recommendList = recommendMovie?.results ?? [];
 
   return (
-    <ul className="grid grid-cols-8 max-[768px]:grid-cols-4 gap-[10px] mt-[2rem]">
+    <ul className="grid grid-cols-8 max-[1023px]:grid-cols-4 gap-[10px] mt-[2rem]">
       {recommendList.map((el) => (
         <MovieCard {...el} key={el.id} />
       ))}
