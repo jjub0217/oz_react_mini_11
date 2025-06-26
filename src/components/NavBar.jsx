@@ -38,6 +38,10 @@ export default function NavBar() {
     }
   };
 
+  const handleMyPage = () => {
+    navigate("/mypage");
+  };
+
   useEffect(() => {
     document.body.classList.toggle("dark", isDark);
     document.body.classList.toggle("light", !isDark);
@@ -88,7 +92,9 @@ export default function NavBar() {
                   isHovering ? "flex" : "hidden"
                 } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
               >
-                <p>관심목록</p>
+                <button type="button" onClick={handleMyPage}>
+                  마이페이지
+                </button>
                 <button type="button" onClick={requestLogOut}>
                   로그아웃
                 </button>
