@@ -311,6 +311,18 @@ body.light {
   }
 }
 
+.my-page {
+  .movie-poster {
+    position: relative;
+    padding-bottom: 120%;
+    width: 10vw;
+    img {
+      position: absolute;
+      top: 0;
+    }
+  }
+}
+
 .trending-people {
   .people-area {
     grid-template-columns: repeat(6, 1fr);
