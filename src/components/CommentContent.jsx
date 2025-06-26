@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IMAGE_BASE_URL } from "../constant/imageBaseUrl";
 
 export const CommentContent = ({ detailInfo, commentCount }) => {
-  console.log(detailInfo);
+  // console.log(detailInfo);
   const [inputCommentValue, setInputCommentValue] = useState("");
 
   const handleComment = (e) => {
