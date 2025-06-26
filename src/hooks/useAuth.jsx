@@ -39,7 +39,7 @@ export const useAuth = () => {
     return { data, error };
   };
 
-  const Login = async ({ email, password }) => {
+  const login = async ({ email, password }) => {
     setIsLoading(true);
     setAuthError(null);
 
@@ -91,7 +91,7 @@ export const useAuth = () => {
 
   return {
     signUp,
-    Login,
+    login,
     logout,
     getUserInfo,
     isLoading,
