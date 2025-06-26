@@ -1,13 +1,13 @@
 import { MovieCard } from "./MovieCard";
 
 import { memo, useMemo } from "react";
+import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { TrendingPeople } from "./TrendingPeople";
-
 export const Main = memo(
   ({
     popularList,
@@ -83,7 +83,7 @@ export const Main = memo(
           </Swiper>
         </section>
         <section className="movie-popular mt-[5rem] max-[1024px]:mt-[3rem] max-[768px]:mt-[2rem]">
-          <div className="inner">
+          <div className="inner relative">
             <h2 className="font-medium text-[1.6rem] max-[1024px]:text-[1.2rem] max-[768px]:text-[1rem] mb-[20px] text-left">
               요즘 뜨는 영화
             </h2>
@@ -117,6 +117,9 @@ export const Main = memo(
             >
               {popularSlides}
             </Swiper>
+            <Link to={`/popular`} className="absolute right-[7rem] top-0">
+              더보기
+            </Link>
           </div>
         </section>
         <section className="movie-now mt-[5rem] max-[1024px]:mt-[3rem] max-[768px]:mt-[2rem]">
