@@ -38,7 +38,7 @@ export const SisunZip = () => {
   }, [movieCredits]);
 
   return (
-    <section className="mt-[9rem] max-[1024px]:mt-[7rem] max-[768px]:mt-[6rem]">
+    <section className="mt-[6rem] max-[1024px]:mt-[7rem] max-[768px]:mt-[6rem]">
       <div className="inner">
         <h2 className="font-medium text-[1.6rem] max-[1024px]:text-[1.2rem] max-[768px]:text-[1rem] mb-[20px] text-left">
           {peopleData[0]?.name} 팬이라면 무조건 봐야 할 영화
