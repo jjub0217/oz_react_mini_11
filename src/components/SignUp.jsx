@@ -136,6 +136,8 @@ export const SignUp = () => {
           </p>
           <p className="mb-[25px] text-[0.95rem] leading-[1.5] text-[#ccc]">
             지금 바로 로그인하고, 나만의 영화 기록을 시작해보세요 🎬
+            <br />
+            (마이페이지에서 프로필 이미지를 변경할 수 있습니다.)
           </p>
           <div className="flex justify-center gap-[10px]">
             <button
