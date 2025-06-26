@@ -6,7 +6,9 @@ import { Login } from "./components/Login";
 import { Main } from "./components/Main";
 import { MovieDetail } from "./components/MovieDetail";
 import { MovieSearch } from "./components/MovieSearch";
+import { MyPage } from "./components/MyPage";
 import OAuthCallback from "./components/OAuthCallback";
+import { PopularPage } from "./components/PopularPage";
 import { SignUp } from "./components/SignUp";
 import { SisunZip } from "./components/Sisunzip";
 import { API_URL } from "./constant/imageBaseUrl";
@@ -104,6 +106,9 @@ function App() {
           <Route path={`/sisunzip`} element={<SisunZip />} />
           <Route path={`/login`} element={<Login />} />
           <Route path={`/signup`} element={<SignUp />} />
+          <Route path={`/popular`} element={<PopularPage />} />
+
+          <Route path={`/mypage`} element={<MyPage />} />
           <Route path="/oauth/callback" element={<OAuthCallback />} />
         </Route>
       </Routes>
