@@ -1,12 +1,13 @@
 import { MovieCard } from "./MovieCard";
 
 import { memo, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useSupabase } from "../context/SupabaseContext";
 import { TrendingPeople } from "./TrendingPeople";
 export const Main = memo(
   ({
@@ -16,9 +17,12 @@ export const Main = memo(
     upComingMovieList,
     trendingPeopleList,
   }) => {
+    const { showLoginGuide, setShowLoginGuide } = useSupabase();
+
+    const navigate = useNavigate();
     const topSlides = useMemo(
       () =>
-        topMovieList.map((el) => (
+        topMovieList.slice(0, 10).map((el) => (
           <SwiperSlide key={el.id}>
             <MovieCard {...el} isSwiper={true} />
           </SwiperSlide>
@@ -62,6 +66,12 @@ export const Main = memo(
         <p className="text-center py-20">영화 데이터를 불러오는 중입니다...</p>
       );
     }
+
+    const handleLogin = () => {
+      navigate("/login");
+      setShowLoginGuide(false);
+    };
+
     return (
       <main className="pb-[50px]">
         <section className="movie-top">
@@ -72,8 +82,15 @@ export const Main = memo(
             modules={[Autoplay, Navigation, Pagination]}
             slidesPerView="auto"
             navigation={true}
-            pagination={{ type: "fraction" }}
-
+            pagination={{
+              type: "fraction",
+              renderFraction: function (currentClass, totalClass) {
+                return `
+                <span class="${currentClass}"></span>
+                <span class="${totalClass}"></span>
+                `;
+              },
+            }}
             // autoplay={{
             //   delay: 5000, // 슬라이드 간 시간 (ms)
             //   disableOnInteraction: false, // 사용자 터치 후에도 계속 자동재생
@@ -96,28 +113,28 @@ export const Main = memo(
               slidesPerGroup={1}
               breakpoints={{
                 320: {
-                  slidesPerView: 3.3,
+                  slidesPerView: 3.5,
                 },
                 640: {
-                  slidesPerView: 3.3,
+                  slidesPerView: 3.5,
                 },
                 768: {
-                  slidesPerView: 5.5,
+                  slidesPerView: 6.5,
                 },
                 1024: {
-                  slidesPerView: 6.5,
-                },
-                1280: {
-                  slidesPerView: 6.5,
+                  slidesPerView: 9.5,
                 },
                 1920: {
-                  slidesPerView: 8.5,
+                  slidesPerView: 11.5,
                 },
               }}
             >
               {popularSlides}
             </Swiper>
-            <Link to={`/popular`} className="absolute right-[7rem] top-0">
+            <Link
+              to={`/popular`}
+              className="more-btn absolute right-[3rem] top-0"
+            >
               더보기
             </Link>
           </div>
@@ -140,16 +157,13 @@ export const Main = memo(
                   slidesPerView: 3.5,
                 },
                 768: {
-                  slidesPerView: 5.5,
+                  slidesPerView: 6.5,
                 },
                 1024: {
-                  slidesPerView: 6.5,
-                },
-                1280: {
-                  slidesPerView: 6.5,
+                  slidesPerView: 9.5,
                 },
                 1920: {
-                  slidesPerView: 8.5,
+                  slidesPerView: 11.5,
                 },
               }}
             >
@@ -175,16 +189,13 @@ export const Main = memo(
                   slidesPerView: 3.5,
                 },
                 768: {
-                  slidesPerView: 5.5,
+                  slidesPerView: 6.5,
                 },
                 1024: {
-                  slidesPerView: 6.5,
-                },
-                1280: {
-                  slidesPerView: 6.5,
+                  slidesPerView: 9.5,
                 },
                 1920: {
-                  slidesPerView: 8.5,
+                  slidesPerView: 11.5,
                 },
               }}
             >
@@ -200,6 +211,34 @@ export const Main = memo(
             <TrendingPeople trendingPeopleList={trendingPeopleList} />
           </div>
         </section>
+        {showLoginGuide && (
+          <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-black bg-opacity-60">
+            <div className="inner bg-[#252525] text-white p-[50px] rounded-[20px] text-center shadow-lg">
+              <h2 className="text-[1.5rem] mb-[30px]">
+                🔒 로그인이 필요합니다
+              </h2>
+              <p className="mb-[25px] text-[0.95rem] text-[#ccc] leading-[1.5]">
+                로그인하시면 관심 영화 등록, 마이페이지 관리 등의 기능을 사용할
+                수 있습니다. <br />
+                지금 로그인하고 나만의 영화 기록을 시작해보세요! 🎬
+              </p>
+              <div className="flex justify-center gap-[10px]">
+                <button
+                  onClick={handleLogin}
+                  className="bg-[#6201e0] px-[20px] py-[10px] rounded-[10px]"
+                >
+                  로그인 하러 가기
+                </button>
+                <button
+                  onClick={() => setShowLoginGuide(false)}
+                  className="bg-[#666] px-[20px] py-[10px] rounded-[10px]"
+                >
+                  닫기
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     );
   }
