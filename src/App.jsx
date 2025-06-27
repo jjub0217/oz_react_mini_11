@@ -107,7 +107,6 @@ function App() {
           <Route path={`/login`} element={<Login />} />
           <Route path={`/signup`} element={<SignUp />} />
           <Route path={`/popular`} element={<PopularPage />} />
-
           <Route path={`/mypage`} element={<MyPage />} />
           <Route path="/oauth/callback" element={<OAuthCallback />} />
         </Route>
