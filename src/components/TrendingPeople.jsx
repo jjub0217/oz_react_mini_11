@@ -56,7 +56,7 @@ export const TrendingPeople = ({ trendingPeopleList }) => {
       {randomPeople.slice(0, 3).map((el, i) => (
         <div
           key={el.id}
-          className="people-box"
+          className="people-box cursor-pointer"
           onClick={() => handleToSisunzip(el.name)}
         >
           <div className="movie-poster">
