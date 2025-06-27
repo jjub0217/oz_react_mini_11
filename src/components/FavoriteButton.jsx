@@ -1,8 +1,8 @@
 import { useSupabase } from "../context/SupabaseContext";
 
 export default function FavoriteButton({ movieId, movieData }) {
-  const { user, favoriteList, setFavoriteList } = useSupabase();
-
+  const { user, favoriteList, setFavoriteList, setShowLoginGuide } =
+    useSupabase();
   const isFavorite =
     Array.isArray(favoriteList) &&
     favoriteList.some((movie) => movie.id === movieId);
@@ -11,7 +11,10 @@ export default function FavoriteButton({ movieId, movieData }) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!user) return;
+    if (!user) {
+      setShowLoginGuide(true); // 전역 상태 변경
+      return;
+    }
 
     setFavoriteList((prev) => {
       if (!Array.isArray(prev)) return [movieData];
@@ -28,12 +31,19 @@ export default function FavoriteButton({ movieId, movieData }) {
   return (
     <button
       type="button"
-      className={`absolute z-auto text-[24px] ${
-        isFavorite ? "text-red-500" : "text-gray-400"
-      }`}
+      className={`absolute z-auto right-[10px] top-[10px] w-[3rem] h-[3rem] rounded-full bg-white/40 shadow-md flex items-center justify-center `}
       onClick={toggleFavorite}
     >
-      {isFavorite ? "♥" : "♡"}
+      {/* {isFavorite ? "♥" : "♡"} */}
+      {isFavorite ? (
+        <div className="w-[2rem] h-[2rem] bookmark">
+          <img src="/images/full-bookmark.png" alt="찜함" />
+        </div>
+      ) : (
+        <div className="w-[2rem] h-[2rem] bookmark">
+          <img src="/images/empty-bookmark.png" alt="찜 안함" />
+        </div>
+      )}
     </button>
   );
 }
