@@ -38,7 +38,7 @@ export const SisunZip = () => {
   }, [movieCredits]);
 
   return (
-    <section className="mt-[6rem] max-[1024px]:mt-[7rem] max-[768px]:mt-[6rem]">
+    <section className="movie-sisunzip mt-[6rem] max-[1024px]:mt-[7rem] max-[768px]:mt-[6rem]">
       <div className="inner">
         <h2 className="font-medium text-[1.6rem] max-[1024px]:text-[1.2rem] max-[768px]:text-[1rem] mb-[20px] text-left">
           {peopleData[0]?.name} 팬이라면 무조건 봐야 할 영화
@@ -53,22 +53,19 @@ export const SisunZip = () => {
           slidesPerGroup={1}
           breakpoints={{
             320: {
-              slidesPerView: 3.3,
+              slidesPerView: 3.5,
             },
             640: {
-              slidesPerView: 3.3,
+              slidesPerView: 3.5,
             },
             768: {
-              slidesPerView: 5.5,
+              slidesPerView: 6.5,
             },
             1024: {
-              slidesPerView: 6.5,
-            },
-            1280: {
-              slidesPerView: 6.5,
+              slidesPerView: 9.5,
             },
             1920: {
-              slidesPerView: 8.5,
+              slidesPerView: 11.5,
             },
           }}
         >
