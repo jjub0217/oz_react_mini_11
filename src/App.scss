@@ -1,6 +1,18 @@
 #root {
   text-align: center;
 }
+@mixin ellipse($line: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @if ($line > 1) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+  } @else {
+    white-space: nowrap;
+  }
+}
 
 body.dark {
   background-color: #1b1b1b;
@@ -33,30 +45,42 @@ body.light {
   gap: 20px;
 }
 
-.popular-movie__list,
-.playing-movie__list {
-  display: grid;
-  gap: 2vw 15px;
-  grid-template-columns: repeat(9, 1fr);
-
-  @media screen and (max-width: 1280px) {
-    grid-template-columns: repeat(7, 1fr);
-  }
-  @media screen and (max-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  @media screen and (max-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  @media screen and (max-width: 640px) {
-    grid-template-columns: repeat(3, 1fr);
+.movie-popular,
+.movie-now,
+.movie-coming {
+  .swiper {
+    padding-right: 3rem;
+    &:after {
+      content: "";
+      display: block;
+      width: 10rem;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(244, 245, 246, 0), #1b1b1b);
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1;
+    }
   }
 }
 
+.more-btn {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  &:after {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    background: url("../public/images/right-arrow.png") no-repeat;
+    background-size: cover;
+  }
+}
 .movie-search__list {
   display: grid;
   gap: 2vw 15px;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(11, 1fr);
 
   @media screen and (max-width: 1280px) {
     grid-template-columns: repeat(7, 1fr);
@@ -73,7 +97,7 @@ body.light {
 }
 
 .movie-poster {
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   img {
     width: 100%;
     height: 100%;
@@ -236,8 +260,9 @@ body.light {
 }
 
 .movie-top {
+  position: relative;
   .swiper-slide {
-    width: 53vw !important;
+    width: auto !important;
 
     @media screen and (max-width: 1700px) {
       width: 85vw !important;
@@ -245,6 +270,7 @@ body.light {
   }
   .movie-poster {
     position: relative;
+    min-width: 1240px;
     padding-bottom: calc((655 / 1600) * 100%) !important;
     @media screen and (max-width: 1700px) {
       padding-bottom: 53% !important;
@@ -277,16 +303,72 @@ body.light {
   }
 
   .swiper-button-prev {
-    left: 21%;
+    left: 27%;
     @media screen and (max-width: 1700px) {
       left: 4%;
     }
   }
 
   .swiper-button-next {
-    right: 21%;
+    right: calc(27%);
     @media screen and (max-width: 1700px) {
       right: 4%;
+    }
+  }
+
+  .swiper {
+    .swiper-pagination {
+      position: absolute;
+      bottom: 20px;
+      left: auto;
+      right: calc(50% - 620px);
+      transform: translate(-50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 4px 10px;
+      color: #fff;
+      border-radius: 20px;
+      width: auto;
+      height: auto;
+      z-index: 10;
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .swiper-pagination-current {
+      font-size: 0.9rem;
+    }
+    .swiper-pagination-total {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: hsla(0, 0%, 100%, 0.7);
+
+      &::before {
+        display: block;
+        margin: 0 10px;
+        width: 1px;
+        height: 10px;
+        background-color: hsla(0, 0%, 100%, 0.2);
+        content: "";
+      }
+    }
+    .swiper-slide-duplicate {
+      display: none;
+    }
+  }
+}
+.movie-popular,
+.movie-now,
+.movie-coming,
+.movie-popular-infinite,
+.movie-sisunzip,
+.movie-search {
+  .movie-poster {
+    .bookmark {
+      img {
+        position: static !important;
+      }
     }
   }
 }
@@ -320,12 +402,17 @@ body.light {
       position: absolute;
       top: 0;
     }
+    .bookmark {
+      img {
+        position: static !important;
+      }
+    }
   }
 }
 
 .trending-people {
   .people-area {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     @media screen and (max-width: 1700px) {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -496,4 +583,16 @@ body.light {
     width: 30rem;
     height: 20rem;
   }
+}
+
+.review-content {
+  max-height: 224px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  &.expanded {
+    max-height: 600px;
+  }
+}
+.review-content__text {
+  @include ellipse(4);
 }
