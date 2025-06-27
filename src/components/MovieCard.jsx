@@ -38,7 +38,7 @@ export const MovieCard = memo((props) => {
 
   return (
     <CardContainer onClick={handleToDetail} isSwiper={isSwiper}>
-      <div className="movie-poster">
+      <div className="movie-poster ">
         {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
         <img
           src={
@@ -53,6 +53,7 @@ export const MovieCard = memo((props) => {
             width: "100%",
             height: "100%",
           }}
+          className="hover:scale-105 transition-transform"
         />
         {isSwiper ? null : (
           <FavoriteButton movieId={movieId} movieData={props} />
