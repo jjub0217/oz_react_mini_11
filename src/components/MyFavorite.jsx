@@ -10,7 +10,7 @@ export default function MyFavorite() {
       {favoriteList.length === 0 ? (
         <p>아직 좋아요 누른 영화가 없습니다.</p>
       ) : (
-        <ul className="movie-list grid grid-cols-6 gap-[1rem] h-[100%] overflow-y-scroll">
+        <ul className="movie-list grid grid-cols-9 gap-[1rem] h-[100%] overflow-y-scroll">
           {favoriteList.map((el) => (
             <MovieCard key={el.id} {...el} />
           ))}
