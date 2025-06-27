@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IMAGE_BASE_URL } from "../constant/imageBaseUrl";
+import FavoriteButton from "./FavoriteButton";
 
 const CardContainer = styled(({ isSwiper, ...rest }) => <div {...rest} />)`
   cursor: pointer;
@@ -37,7 +38,7 @@ export const MovieCard = memo((props) => {
 
   return (
     <CardContainer onClick={handleToDetail} isSwiper={isSwiper}>
-      <div className="movie-poster">
+      <div className="movie-poster ">
         {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
         <img
           src={
@@ -52,13 +53,19 @@ export const MovieCard = memo((props) => {
             width: "100%",
             height: "100%",
           }}
+          className="hover:scale-105 transition-transform"
         />
+        {isSwiper ? null : (
+          <FavoriteButton movieId={movieId} movieData={props} />
+        )}
       </div>
       {isSwiper ? null : (
         <div className="flex flex-col gap-[15px] items-start pt-[15px] max-[768px]:hidden">
           <h2
-            className={`${title} ? leading-none font-[500] text-[20px] max-[1700px]:text-[18px] max-[1024px]:text-[1rem] max-[820px]:text-[16px] max-[420px]:text-[16px] text-left
-          : h-[20px] max-[1700px]:h-[18px] max-[1024px]:h-[1rem] max-[820px]:h-[16px] max-[420px]:h-[16px]
+            className={`${title} ? leading-none font-[500] text-[20px] text-left min-h-[20px]
+            max-[1700px]:text-[18px] max-[1024px]:text-[1rem] max-[820px]:text-[16px] 
+            max-[420px]:text-[16px] 
+            max-[1700px]:h-[18px] max-[1024px]:h-[1rem] max-[820px]:h-[16px] max-[420px]:h-[16px]
           `}
           >
             {title}

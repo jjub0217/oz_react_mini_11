@@ -18,14 +18,14 @@ export const Login = () => {
     password: "",
   });
 
-  const { Login, loginWithKakao, loginWithGoogle } = useSupabaseAuth();
+  const { login, loginWithKakao, loginWithGoogle } = useSupabaseAuth();
 
   const requestLogin = async (e) => {
     e.preventDefault();
     const isValid = Object.values(errorType).every((val) => val === "");
     if (!isValid) return;
     const { email, password } = loginUserInfo;
-    const { data, error } = await Login({ email, password });
+    const { data, error } = await login({ email, password });
     console.log("✅ 로그인 응답:", data, error);
     if (!error) {
       navigate("/");

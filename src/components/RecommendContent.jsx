@@ -3,12 +3,12 @@ import useFetch from "../hooks/useFetch";
 import { MovieCard } from "./MovieCard";
 
 export const RecommendContent = ({ id }) => {
-  console.log(id);
+  // console.log(id);
 
   const { data: recommendMovie } = useFetch(
     `${API_URL}/movie/${id}/recommendations?language=ko&page=1`
   );
-  console.log(recommendMovie);
+  // console.log(recommendMovie);
   const recommendList = recommendMovie?.results ?? [];
 
   return (

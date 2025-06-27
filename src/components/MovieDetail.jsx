@@ -4,9 +4,9 @@ import { getTabs } from "../constant/getTabs";
 import { API_URL, IMAGE_BASE_URL } from "../constant/imageBaseUrl";
 import useFetch from "../hooks/useFetch";
 import { CommentContent } from "./CommentContent";
-import { MovieDetailTabs } from "./MovieDetailTab";
 import { RecommendContent } from "./RecommendContent";
 import { SkeletonDetail } from "./SkeletonDetail";
+import { Tabs } from "./Tabs";
 
 export const MovieDetail = () => {
   const { id } = useParams();
@@ -67,7 +67,7 @@ export const MovieDetail = () => {
       </section>
       <section className="movie-tab__info pb-[80px] max-[768px]:px-[5vw]">
         <div className="inner text-left w-full">
-          <MovieDetailTabs setActiveTab={setActiveTab} tabs={tabs} id={id} />
+          <Tabs setActiveTab={setActiveTab} tabs={tabs} id={id} />
           <div className="movie-tabs-content">
             <div
               style={{ display: activeTab === "comments" ? "block" : "none" }}

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const useFetch = (url) => {
+const useFetch = (initialUrl = null) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,23 +13,28 @@ const useFetch = (url) => {
     },
   };
 
-  const getData = async () => {
+  const getData = useCallback(async (customUrl) => {
     setIsLoading(true);
     try {
-      const res = await fetch(url, options);
+      const res = await fetch(customUrl, options);
       if (!res.ok) throw new Error("데이터를 가져오는 데 실패했습니다.");
       const json = await res.json();
-      setData(json);
+      return json; //  외부에서 가공 가능해야 하기 때문에
     } catch (err) {
       setError(err);
+      return null;
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    if (url) getData();
-  }, [url]);
-  return { isLoading, data, error };
+    if (!initialUrl) return;
+    getData(initialUrl).then((res) => {
+      if (res) setData(res);
+    });
+  }, [initialUrl, getData]);
+
+  return { isLoading, data, error, getData };
 };
 export default useFetch;

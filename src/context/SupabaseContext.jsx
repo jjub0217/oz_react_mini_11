@@ -5,8 +5,21 @@ const SUPABASE = createContext(null);
 
 export const SupabaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [favoriteList, setFavoriteList] = useState([]);
+  const [showLoginGuide, setShowLoginGuide] = useState(false);
+
   return (
-    <SUPABASE.Provider value={{ supabase: supabaseClient, user, setUser }}>
+    <SUPABASE.Provider
+      value={{
+        supabase: supabaseClient,
+        user,
+        setUser,
+        favoriteList,
+        setFavoriteList,
+        showLoginGuide,
+        setShowLoginGuide,
+      }}
+    >
       {children}
     </SUPABASE.Provider>
   );
