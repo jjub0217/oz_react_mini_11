@@ -27,6 +27,8 @@ export const MovieCard = memo((props) => {
     release_date,
     id: movieId,
     isSwiper = false,
+    pageType,
+    onImageLoad,
   } = props;
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -39,7 +41,7 @@ export const MovieCard = memo((props) => {
   return (
     <CardContainer onClick={handleToDetail} isSwiper={isSwiper}>
       <div className="movie-poster ">
-        {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
+        {/* {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>} */}
         <img
           src={
             isSwiper
@@ -47,7 +49,10 @@ export const MovieCard = memo((props) => {
               : `${IMAGE_BASE_URL.poster}${poster_path}`
           }
           alt={title}
-          onLoad={() => setIsLoaded(true)}
+          onLoad={() => {
+            setIsLoaded(true);
+            onImageLoad?.(); // ✅ Main에게 알림
+          }}
           style={{
             visibility: isLoaded ? "visible" : "hidden",
             width: "100%",
@@ -59,7 +64,7 @@ export const MovieCard = memo((props) => {
           <FavoriteButton movieId={movieId} movieData={props} />
         )}
       </div>
-      {isSwiper ? null : (
+      {isSwiper || pageType ? null : (
         <div className="flex flex-col gap-[15px] items-start pt-[15px] max-[768px]:hidden">
           <h2
             className={`${title} ? leading-none font-[500] text-[20px] text-left min-h-[20px]
