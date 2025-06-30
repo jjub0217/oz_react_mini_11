@@ -44,7 +44,7 @@ export const Login = () => {
   };
 
   return (
-    <main className="h-[calc(80vh-74px)] flex items-center max-[820px]:h-[auto]">
+    <main className="h-[calc(80vh-74px)] flex items-center max-[820px]:h-[100vh]">
       <div className="inner max-w-screen-md w-full bg-[#252525] px-[50px] py-[50px] max-[820px]:bg-[#1b1b1b] max-[820px]:px-[0px] max-[820px]:pt-[20px] max-[768px]:px-[20px]">
         <h2 className="text-[2rem] max-[820px]:hidden">로그인</h2>
         <h2 className="hidden max-[820px]:text-[2rem] max-[820px]:flex max-[820px]:justify-center ">

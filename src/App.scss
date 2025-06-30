@@ -951,12 +951,14 @@ input[type="file"] {
 }
 
 .my-page {
-  @media screen and (max-width: 1279px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
   }
   .my-page-nav {
-    flex-direction: row;
-    padding-bottom: 0;
+    @media screen and (max-width: 768px) {
+      padding-bottom: 0;
+      flex-direction: row;
+    }
   }
 }
 

@@ -107,7 +107,7 @@ export default function NavBar() {
               <img
                 src={user?.user_metadata?.profileImage || "images/user.png"}
                 alt="프로필 이미지"
-                className="w-full h-full rounded-full object-cover"
+                className="w-full h-full rounded-full object-cover max-[768px]:object-contain max-[768px]:h-[1.5rem]"
               />
             </div>
             <div

@@ -16,7 +16,7 @@ export default function MyFavorite() {
             </p>
           </div>
         ) : (
-          <ul className="movie-list grid grid-cols-9 gap-[1rem] h-[100%] overflow-y-scroll">
+          <ul className="movie-list grid grid-cols-9 gap-[1rem] h-[100%] overflow-y-scroll max-[768px]:grid-cols-3">
             {favoriteList.map((el) => (
               <MovieCard key={el.id} {...el} />
             ))}

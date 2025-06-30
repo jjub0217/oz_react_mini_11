@@ -47,7 +47,7 @@ export const MyPage = () => {
             <Tabs tabs={tabs} pageType={"mypage"} />
           </nav>
           <section className="movie-tabs-content h-[100%] flex-1 max-[768px]:h-[auto]">
-            <div className="h-[100%] p-[2rem] bg-[#252525] rounded-[20px] max-[768px]:h-[100vh]">
+            <div className="h-[100%] p-[2rem] bg-[#252525] rounded-[20px]">
               <Outlet context={{ reviewData, favoriteList }} />
             </div>
           </section>
