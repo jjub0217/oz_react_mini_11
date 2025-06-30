@@ -19,7 +19,7 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
 
   return (
     <div className="mt-6">
-      <p className="text-gray-400 text-[1.4rem] max-[768px]:text-[1rem]">
+      <p className="text-gray-400 text-[1.4rem] max-[1279px]:text-[1.2rem] max-[768px]:text-[1rem]">
         리뷰 <span>{commentCount}</span>개
       </p>
       <input
@@ -40,7 +40,7 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
               style={{ borderColor: "rgba(255, 255, 255, 0.2)" }}
               className="pt-[2rem] border-b-[1px] pb-[20px]"
             >
-              <div className="text-sm text-gray-400 flex gap-[10px] items-center">
+              <div className="text-sm text-gray-400 flex gap-[10px] items-center pb-[1rem]">
                 <div
                   className={`${
                     el.author_details.avatar_path
@@ -63,11 +63,11 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
                     className={
                       el.author_details.avatar_path
                         ? "w-[100%] h-[100%] object-cover"
-                        : "w-[1vw] h-[1vw]"
+                        : "w-[1.5rem] h-[1.5rem]"
                     }
                   />
                 </div>
-                <span className="font-semibold text-white text-[1rem]">
+                <span className="font-semibold text-white text-[1rem] max-[1279px]:text-[15px]">
                   {el.author}
                 </span>
                 {el.updated_ate}
@@ -77,7 +77,7 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
                    ${isExpanded ? "expanded" : ""}`}
               >
                 <p
-                  className={`whitespace-pre-line text-gray-300 text-[1rem] max-[768px]:text-[0.9rem] ${
+                  className={`whitespace-pre-line text-gray-300 text-[1rem] max-[768px]:text-[0.9rem] max-[1279px]:text-[15px] ${
                     isExpanded ? "" : "review-content__text"
                   }
                   `}
