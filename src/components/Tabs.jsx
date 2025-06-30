@@ -24,7 +24,7 @@ export const Tabs = ({ tabs, setActiveTab, pageType }) => {
   return (
     <div
       className={`flex ${
-        pageType === "mypage" && "flex-col p-0 h-[100%] pb-0"
+        pageType === "mypage" && "my-page-nav flex-col p-0 h-[100%] pb-0"
       } gap-[20px] pb-[1.4rem] border-b-[1px] max-[1700px]:text-[1rem] max-[768px]:pb-[1rem]`}
       style={{
         borderColor:

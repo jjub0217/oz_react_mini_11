@@ -69,7 +69,7 @@ export const MyPageHome = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-[3rem] flex-1">
+      <div className="grid grid-cols-2 gap-[3rem] flex-1 max-[768px]:grid-cols-1">
         <section>
           <h3 className="text-xl font-bold mb-[2rem] max-[1700px]:text-[1rem]">
             📝 최근 작성한 리뷰
@@ -80,7 +80,7 @@ export const MyPageHome = () => {
               return (
                 <li
                   key={review.id}
-                  className="dashboard__review shadow-lg  bg-[#333] py-4 px-10 rounded-xl flex items-start"
+                  className="dashboard__review shadow-lg  bg-[#333]  rounded-xl flex items-start"
                 >
                   <div
                     className="movie-poster"
@@ -127,27 +127,40 @@ export const MyPageHome = () => {
           <h3 className="text-xl font-bold mb-[2rem] max-[1700px]:text-[1rem]">
             ❤️ 최근 관심 등록한 영화
           </h3>
-          <div className="grid grid-cols-4 gap-4 dashboard-favorite ">
-            {favoriteList.slice(0, 5).map((movie) => (
-              <div
-                key={movie.id}
-                className="movie-poster rounded-xl overflow-hidden"
-                onClick={() => handleToDetail(movie.id)}
-              >
-                {/* {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>} */}
-                <img
-                  src={`${IMAGE_BASE_URL.poster}${movie.poster_path}`}
-                  alt={movie.title}
-                  onLoad={onImageLoad}
-                  // style={{ display: isLoaded ? "block" : "none" }}
-                  style={{
-                    visibility: isAllLoaded ? "visible" : "hidden",
-                    // width: "100%",
-                    // height: "auto",
-                  }}
-                />
+          <div>
+            {favoriteList.length === 0 ? (
+              <div className="no-favorite text-center border border-dashed rounded-xl p-6 mt-10">
+                <p className="text-[1.5rem] mb-2 max-[786px]:text-[1rem]">
+                  💔 찜한 영화가 없어요
+                </p>
+                <p className="text-[1rem] opacity-70 max-[786px]:text-[0.9rem]">
+                  마음에 드는 영화를 찾아 찜해보세요!
+                </p>
               </div>
-            ))}
+            ) : (
+              <div lassName="grid grid-cols-4 gap-4 dashboard-favorite">
+                {favoriteList.slice(0, 5).map((movie) => (
+                  <div
+                    key={movie.id}
+                    className="movie-poster rounded-xl overflow-hidden"
+                    onClick={() => handleToDetail(movie.id)}
+                  >
+                    {/* {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>} */}
+                    <img
+                      src={`${IMAGE_BASE_URL.poster}${movie.poster_path}`}
+                      alt={movie.title}
+                      onLoad={onImageLoad}
+                      // style={{ display: isLoaded ? "block" : "none" }}
+                      style={{
+                        visibility: isAllLoaded ? "visible" : "hidden",
+                        // width: "100%",
+                        // height: "auto",
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </div>

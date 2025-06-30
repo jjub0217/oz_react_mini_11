@@ -649,6 +649,13 @@ input[type="file"] {
 
 .dashboard__review,
 .dashboard-favorite {
+  padding: 1rem 2.5rem;
+  @media screen and (max-width: 768px) {
+    // padding: 0 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 5px;
+  }
   .movie-poster {
     width: 20%;
     padding-bottom: 20%;
@@ -658,6 +665,10 @@ input[type="file"] {
       height: 100%;
       object-fit: contain;
       object-position: top;
+    }
+    @media screen and (max-width: 768px) {
+      width: 40%;
+      padding-bottom: 50%;
     }
   }
 }
@@ -930,4 +941,14 @@ input[type="file"] {
   top: 0;
   left: 0;
   overflow: hidden;
+}
+
+.my-page {
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+  }
+  .my-page-nav {
+    flex-direction: row;
+    padding-bottom: 0;
+  }
 }

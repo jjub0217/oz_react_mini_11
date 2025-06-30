@@ -6,6 +6,7 @@ import { useSupabaseAuth } from "../hooks/useSupabaseAuth";
 export default function NavBar() {
   const [inputValue, setInputValue] = useState("");
   const [isDark, setIsDark] = useState(true);
+
   const [isHovering, setIsHovering] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -35,23 +36,36 @@ export default function NavBar() {
     const { error } = await logout();
     if (!error) {
       setIsHovering(false);
+      setIsMenuOpen(false); // 메뉴 닫기
       navigate("/");
     }
   };
 
   const handleMyPage = () => {
     navigate("/my-page");
+    setIsMenuOpen(false);
   };
+
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+
+  const isMenuVisible = isMenuOpen || isHovering;
+
   useEffect(() => {
     document.body.classList.toggle("dark", isDark);
     document.body.classList.toggle("light", !isDark);
   }, [isDark]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(".user-menu")) {
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
 
   return (
     <nav className="">
@@ -62,11 +76,7 @@ export default function NavBar() {
             <span className="logo text-[1.5rem] max-[480px]:hidden">무비</span>
           </Link>
         </h1>
-        <div
-          className={`parent flex gap-[10px] items-center ${
-            isMenuOpen ? "relative" : ""
-          }`}
-        >
+        <div className={`parent flex gap-[10px] items-center`}>
           <div className="search-box">
             <input
               type="text"
@@ -88,9 +98,10 @@ export default function NavBar() {
             )}
           </button>
           <div
-            onMouseEnter={() => setIsMenuOpen(true)}
-            onMouseLeave={() => setIsMenuOpen(false)}
-            onClick={toggleMenu}
+            className="relative user-menu"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            onClick={toggleMenu} // 모바일 대응
           >
             <div className="w-[43px] h-[43px] rounded-full bg-gray-700 flex items-center justify-center">
               <img
@@ -100,9 +111,10 @@ export default function NavBar() {
               />
             </div>
             <div
-              className={`child absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10 ${
-                isMenuOpen ? "flex" : "hidden"
+              className={`child absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10 w-max ${
+                isMenuVisible ? "flex" : "hidden"
               } `}
+              onClick={(e) => e.stopPropagation()}
             >
               {user ? (
                 <>
