@@ -18,7 +18,7 @@ export const Tabs = ({ tabs, setActiveTab, pageType }) => {
     } else {
       setActiveTab(tabKey);
     }
-    console.log(tabKey);
+    // console.log(tabKey);
   };
 
   return (

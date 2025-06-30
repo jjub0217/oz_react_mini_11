@@ -18,7 +18,7 @@ export const MovieDetail = () => {
   const { data: detailInfo } = useFetch(
     `${API_URL}/movie/${id}/reviews?language=en-US&page=1`
   );
-  console.log(movieDetail);
+  // console.log(movieDetail);
 
   const commentList = detailInfo?.results ?? [];
   const commentCount = detailInfo?.results?.length ?? 0;

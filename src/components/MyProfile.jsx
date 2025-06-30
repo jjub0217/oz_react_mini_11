@@ -48,11 +48,11 @@ export const MyProfile = () => {
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
-    console.log("선택된 파일 👉", file);
+    // console.log("선택된 파일 👉", file);
 
     if (file) {
       const imageUrl = await updateProfileImage(file, user.id);
-      console.log("업로드된 이미지 URL 👉", imageUrl);
+      // console.log("업로드된 이미지 URL 👉", imageUrl);
 
       if (imageUrl) {
         alert("프로필 이미지가 변경되었습니다.");
@@ -106,7 +106,7 @@ export const MyProfile = () => {
         />
       </div>
 
-      <div className="text-white flex flex-col gap-[2rem] absolute top-[80%] left-[30px]">
+      <div className=" flex flex-col gap-[2rem] absolute top-[80%] left-[30px]">
         <div className="flex items-end gap-[2rem]">
           <div className="w-[120px] h-[120px] rounded-full bg-gray-700  flex items-center justify-center relative">
             <img
@@ -133,7 +133,7 @@ export const MyProfile = () => {
             <span className="text-[1.4rem] max-[1700px]:text-[1.2rem]">
               {name}
             </span>
-            <p className="text-[1.1rem] text-[#ccc]">{email}</p>
+            <p className="text-[1.1rem]">{email}</p>
           </div>
         </div>
 
@@ -150,7 +150,7 @@ export const MyProfile = () => {
                 {nickname || <span className="text-[#aaa]">없음</span>}
               </p>
               <button
-                className="text-sm px-2 py-1  rounded  bg-[#6201e0]"
+                className="text-sm px-2 py-1  rounded  bg-[#6201e0] text-white"
                 onClick={() => setIsEditing(true)}
               >
                 변경

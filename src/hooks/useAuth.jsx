@@ -111,8 +111,8 @@ export const useAuth = () => {
     const fileName = `${userId}_${Date.now()}.${fileExt}`;
     const filePath = `${userId}/${fileName}`;
 
-    console.log("업로드 시도 - 파일:", file);
-    console.log("업로드 경로:", filePath);
+    // console.log("업로드 시도 - 파일:", file);
+    // console.log("업로드 경로:", filePath);
 
     // 1. Supabase Storage에 이미지 업로드
     const { error: uploadError } = await supabase.storage
@@ -130,7 +130,7 @@ export const useAuth = () => {
       return null;
     }
 
-    console.log("✅ 이미지 업로드 성공");
+    // console.log("✅ 이미지 업로드 성공");
 
     // 2. 이미지 URL 가져오기 (public URL 생성)
     const { data: publicUrlData } = supabase.storage

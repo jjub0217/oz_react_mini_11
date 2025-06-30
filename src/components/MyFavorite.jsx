@@ -9,7 +9,7 @@ export default function MyFavorite() {
     <div className="h-[100%] overflow-hidden my-favorite">
       <section className="h-[100%]">
         {favoriteList.length === 0 ? (
-          <div className="text-white text-center border border-white border-dashed rounded-xl p-6 mt-10">
+          <div className="no-favorite text-center border border-white border-dashed rounded-xl p-6 mt-10">
             <p className="text-[1.5rem] mb-2">💔 찜한 영화가 없어요</p>
             <p className="text-[1rem] opacity-70">
               마음에 드는 영화를 찾아 찜해보세요!

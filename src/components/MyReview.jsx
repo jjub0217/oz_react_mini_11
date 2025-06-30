@@ -15,7 +15,7 @@ export const MyReview = () => {
     navigate(`/detail/${movieId}`);
   };
 
-  console.log(reviewData);
+  // console.log(reviewData);
 
   const totalImageCount = reviewData.reviews.length;
 
@@ -49,13 +49,10 @@ export const MyReview = () => {
           </div>
         </div>
       )}
-      <h2 className="text-white text-left mb-[2rem] text-[2rem] max-[1700px]:text-[1.7rem] max-[1700px]:mb-[1rem]">
+      <h2 className="text-left mb-[2rem] text-[2rem] max-[1700px]:text-[1.7rem] max-[1700px]:mb-[1rem]">
         My Reviews
       </h2>
-      <div
-        className="flex justify-between items-center pb-[1.3rem] text-white border-b-[1px]"
-        style={{ borderColor: "rgba(255, 255, 255, 0.2)" }}
-      >
+      <div className="border-bottom flex justify-between items-center pb-[1.3rem] border-b-[1px]">
         <div
           className="total-review flex flex-col"
           style={{ width: "calc(100% / 3)" }}
@@ -69,7 +66,7 @@ export const MyReview = () => {
         </div>
         <div
           className="w-[1.2px] self-stretch divider"
-          style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+          // style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
         />
         <div
           className="average-rating flex flex-col items-center"
@@ -96,7 +93,7 @@ export const MyReview = () => {
         </div>
         <div
           className="w-[1.2px] self-stretch divider"
-          style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+          // style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
         />
         <div
           className="average-rating-count flex flex-col items-center"
@@ -167,16 +164,16 @@ export const MyReview = () => {
                   />
                 </div>
                 <div className="movie-info flex flex-col items-start gap-[0.2rem]">
-                  <div className="text-[white] text-[1.3rem]">{el.title}</div>
+                  <div className=" text-[1.3rem]">{el.title}</div>
                   <div className="flex gap-[10px]">
                     <span>Total rating average</span>
-                    <span className="text-white font-semibold">
+                    <span className=" font-semibold">
                       {el.vote_average.toFixed(1)}
                     </span>{" "}
                   </div>
                   <div className="flex gap-[10px]">
                     <span>Total reviews</span>
-                    <span className="text-white font-semibold">
+                    <span className=" font-semibold">
                       {el.total_results.toLocaleString()}
                     </span>
                   </div>

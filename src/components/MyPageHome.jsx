@@ -42,7 +42,7 @@ export const MyPageHome = () => {
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-[#333] p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
+        <div className="dashboard bg-[#333] p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
           <p className="text-xl font-semibold max-[1700px]:text-[1rem]">
             작성한 리뷰
           </p>
@@ -50,13 +50,13 @@ export const MyPageHome = () => {
             {total_reviews}개
           </p>
         </div>
-        <div className="bg-[#333] p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
+        <div className="dashboard bg-[#333] p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
           <p className="text-xl font-semibold max-[1700px]:text-[1rem]">
             관심 영화
           </p>
           <p className="text-2xl mt-2 max-[1700px]:text-[1.3rem]">{"20"}편</p>
         </div>
-        <div className="bg-[#333] p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
+        <div className="dashboard bg-[#333] p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
           <p className="text-xl font-semibold max-[1700px]:text-[1rem]">
             평균 평점
           </p>
@@ -80,7 +80,7 @@ export const MyPageHome = () => {
               return (
                 <li
                   key={review.id}
-                  className="dashboard__review bg-[#333] py-4 px-10 rounded-xl flex items-start"
+                  className="dashboard__review shadow-lg  bg-[#333] py-4 px-10 rounded-xl flex items-start"
                 >
                   <div
                     className="movie-poster"

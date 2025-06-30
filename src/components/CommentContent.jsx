@@ -67,15 +67,12 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
                     }
                   />
                 </div>
-                <span className="font-semibold text-white text-[1rem] max-[1279px]:text-[15px]">
+                <span className="font-semibold text-[1rem] max-[1279px]:text-[15px]">
                   {el.author}
                 </span>
                 {el.updated_ate}
               </div>
-              <div
-                className={` review-content
-                   ${isExpanded ? "expanded" : ""}`}
-              >
+              <div className={`review-content ${isExpanded ? "expanded" : ""}`}>
                 <p
                   className={`whitespace-pre-line text-gray-300 text-[1rem] max-[768px]:text-[0.9rem] max-[1279px]:text-[15px] ${
                     isExpanded ? "" : "review-content__text"

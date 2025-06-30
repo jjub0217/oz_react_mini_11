@@ -17,6 +17,15 @@
 body.dark {
   background-color: #1b1b1b;
   color: #a5a5a5;
+  .divider {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .border-bottom {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .no-favorite {
+    border-color: white;
+  }
 }
 body {
   @media screen and (max-width: 1024px) {
@@ -26,8 +35,48 @@ body {
 }
 
 body.light {
-  background-color: #d5d4d4;
+  background-color: #f1f1f1;
   color: #000;
+
+  .movie-poster__backdrop {
+    &:before {
+      background-image: url("../public/images/detail_bg_white.png");
+      background-size: 100% 100%;
+    }
+  }
+  .review-content {
+    p {
+      color: #000;
+    }
+  }
+  .parent {
+    .child {
+      button {
+        color: #e4e5e9;
+      }
+    }
+  }
+  .movie-tabs-content {
+    & > div {
+      background-color: #cfcfcf;
+    }
+  }
+  .dashboard,
+  .dashboard__review {
+    background-color: #c2c2c2;
+  }
+  .dashboard-nav {
+    background-color: #cfcfcf;
+  }
+  .divider {
+    background-color: #000;
+  }
+  .border-bottom {
+    border-color: #000;
+  }
+  .no-favorite {
+    border-color: #000;
+  }
 }
 
 .blind {
@@ -78,6 +127,18 @@ input[type="file"] {
       right: 0;
       top: 0;
       z-index: 1;
+    }
+  }
+}
+.light {
+  .movie-popular,
+  .movie-now,
+  .movie-coming,
+  .movie-tabs-content {
+    .swiper {
+      &:after {
+        background: linear-gradient(90deg, rgba(244, 245, 246, 0), #f1f1f1);
+      }
     }
   }
 }
@@ -280,7 +341,7 @@ input[type="file"] {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    color: #fff;
+    // color: #fff;
 
     // @media screen and (max-width: 768px) {
     //   padding: 0 5vw;

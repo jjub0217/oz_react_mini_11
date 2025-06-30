@@ -12,7 +12,7 @@ export const MovieSearch = ({ popularList }) => {
   useEffect(() => {
     const reg = getRegExp(param);
     const result = popularList.filter((el) => el.title.match(reg));
-    console.log(result);
+    // console.log(result);
 
     setSearchedList(result);
   }, [param]);

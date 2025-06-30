@@ -26,7 +26,7 @@ export const Login = () => {
     if (!isValid) return;
     const { email, password } = loginUserInfo;
     const { data, error } = await login({ email, password });
-    console.log("✅ 로그인 응답:", data, error);
+    // console.log("✅ 로그인 응답:", data, error);
     if (!error) {
       navigate("/");
     } else {

@@ -10,7 +10,7 @@ import { getGenreDescription } from "../utils/getGenreDescription";
 import { MovieCard } from "./MovieCard";
 
 export const RecommendContent = ({ id, genres }) => {
-  console.log(genres); // [{id: 27, name: '공포'},{id: 53, name: '스릴러'},{id: 878, name: 'SF'}]
+  // console.log(genres); // [{id: 27, name: '공포'},{id: 53, name: '스릴러'},{id: 878, name: 'SF'}]
   const { getData } = useFetch();
   const [genreList, setGenreList] = useState([]);
   const [genreMovie, setGenreMovie] = useState({});
@@ -81,7 +81,7 @@ export const RecommendContent = ({ id, genres }) => {
     fetchGenreList();
   }, []);
 
-  console.log(actorMovie);
+  // console.log(actorMovie);
 
   return (
     <>
@@ -91,7 +91,7 @@ export const RecommendContent = ({ id, genres }) => {
 
         return (
           <section key={genre.name} className="pt-[2rem] mb-[3rem]">
-            <h3 className="text-white text-[1.5rem] mb-[1.3rem] ">
+            <h3 className="text-[1.5rem] mb-[1.3rem] ">
               {getGenreDescription(genre.id, genreList)}
             </h3>
             <Swiper
@@ -132,7 +132,7 @@ export const RecommendContent = ({ id, genres }) => {
 
         return (
           <section key={actorName} className="pt-[2rem] mb-[3rem]">
-            <h3 className="text-white text-[1.5rem] mb-[1.3rem]">
+            <h3 className="text-[1.5rem] mb-[1.3rem]">
               {actorName}의 팬이라면 무조건 봐야 할 영화
             </h3>
             <Swiper

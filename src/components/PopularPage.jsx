@@ -38,7 +38,7 @@ export const PopularPage = () => {
     setPage((prev) => prev + 1);
   };
 
-  console.log(movieList);
+  // console.log(movieList);
 
   const throttled = useThrottle(fetchNext, 300);
 

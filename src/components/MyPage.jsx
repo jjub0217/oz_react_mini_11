@@ -37,13 +37,13 @@ export const MyPage = () => {
   }, [user]);
 
   if (!reviewData) return <p>로딩 중...</p>;
-  console.log(reviewData);
+  // console.log(reviewData);
 
   return (
     <main>
       <div className="inner px-[5vw]">
         <div className="my-page flex py-[2rem] gap-[2rem] h-[90vh]">
-          <nav className="bg-[#252525] rounded-[20px] p-[2rem] h-fit">
+          <nav className="dashboard-nav bg-[#252525] rounded-[20px] p-[2rem] h-fit">
             <Tabs tabs={tabs} pageType={"mypage"} />
           </nav>
           <section className="movie-tabs-content h-[100%] flex-1">

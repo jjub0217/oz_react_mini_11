@@ -85,7 +85,7 @@ export default function NavBar() {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <div className="w-[43px] h-[43px] rounded-full bg-gray-700  flex items-center justify-center">
+            <div className="w-[43px] h-[43px] rounded-full bg-gray-700 flex items-center justify-center">
               <img
                 src={user?.user_metadata?.profileImage || "images/user.png"}
                 alt="프로필 이미지"
@@ -99,7 +99,6 @@ export default function NavBar() {
             >
               {user ? (
                 <>
-                  {" "}
                   <button type="button" onClick={handleMyPage}>
                     마이페이지
                   </button>

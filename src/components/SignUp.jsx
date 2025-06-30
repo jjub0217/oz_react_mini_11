@@ -42,7 +42,7 @@ export const SignUp = () => {
 
     const { email, password, name } = userInfo;
     const { data, error } = await signUp({ email, password, name });
-    console.log("✅ Supabase 응답:", data, error);
+    // console.log("✅ Supabase 응답:", data, error);
 
     if (!error) {
       setIsSignUpSuccess(true);
