@@ -90,8 +90,11 @@ export const RecommendContent = ({ id, genres }) => {
         if (!Array.isArray(movies) || movies.length === 0) return null;
 
         return (
-          <section key={genre.name} className="pt-[2rem] mb-[3rem]">
-            <h3 className="text-[1.5rem] mb-[1.3rem] ">
+          <section
+            key={genre.name}
+            className="pt-[2rem] mb-[3rem] max-[768px]:mb-[1rem]"
+          >
+            <h3 className="text-[1.5rem] mb-[1.3rem] max-[768px]:text-[1rem] ">
               {getGenreDescription(genre.id, genreList)}
             </h3>
             <Swiper
@@ -131,8 +134,11 @@ export const RecommendContent = ({ id, genres }) => {
         if (!Array.isArray(movies) || movies.length === 0) return null;
 
         return (
-          <section key={actorName} className="pt-[2rem] mb-[3rem]">
-            <h3 className="text-[1.5rem] mb-[1.3rem]">
+          <section
+            key={actorName}
+            className="pt-[2rem] mb-[3rem] max-[768px]:mb-[1rem]"
+          >
+            <h3 className="text-[1.5rem] mb-[1.3rem] max-[768px]:text-[1rem] ">
               {actorName}의 팬이라면 무조건 봐야 할 영화
             </h3>
             <Swiper

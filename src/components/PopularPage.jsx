@@ -60,7 +60,7 @@ export const PopularPage = () => {
       <h2 className="font-medium text-[1.6rem] max-[1024px]:text-[1.2rem] max-[768px]:text-[1rem] mb-[20px] text-left">
         요즘 뜨는 영화
       </h2>
-      <section className="grid grid-cols-9 gap-[20px] movie-popular-infinite">
+      <section className="grid  movie-popular-infinite">
         {movieList.map((movie) => (
           <div key={movie.id}>
             <MovieCard {...movie} pageType={"popular"} />

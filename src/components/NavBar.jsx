@@ -7,6 +7,7 @@ export default function NavBar() {
   const [inputValue, setInputValue] = useState("");
   const [isDark, setIsDark] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
   const navigateDebounce = useDebounce();
@@ -41,7 +42,12 @@ export default function NavBar() {
   const handleMyPage = () => {
     navigate("/my-page");
   };
-
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
   useEffect(() => {
     document.body.classList.toggle("dark", isDark);
     document.body.classList.toggle("light", !isDark);
@@ -57,8 +63,8 @@ export default function NavBar() {
           </Link>
         </h1>
         <div
-          className={`parent flex gap-[10px] items-center  ${
-            isHovering ? "relative" : ""
+          className={`parent flex gap-[10px] items-center ${
+            isMenuOpen ? "relative" : ""
           }`}
         >
           <div className="search-box">
@@ -82,8 +88,9 @@ export default function NavBar() {
             )}
           </button>
           <div
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
+            onMouseEnter={() => setIsMenuOpen(true)}
+            onMouseLeave={() => setIsMenuOpen(false)}
+            onClick={toggleMenu}
           >
             <div className="w-[43px] h-[43px] rounded-full bg-gray-700 flex items-center justify-center">
               <img
@@ -93,9 +100,9 @@ export default function NavBar() {
               />
             </div>
             <div
-              className={`child ${
-                isHovering ? "flex" : "hidden"
-              } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
+              className={`child absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10 ${
+                isMenuOpen ? "flex" : "hidden"
+              } `}
             >
               {user ? (
                 <>

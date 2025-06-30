@@ -45,16 +45,16 @@ export default function FavoriteButton({ movieId, movieData }) {
   return (
     <button
       type="button"
-      className={`absolute z-auto right-[10px] top-[10px] w-[3rem] h-[3rem] rounded-full bg-white/40 shadow-md flex items-center justify-center `}
+      className={`favorite-btn absolute z-auto rounded-full bg-white/40 shadow-md flex items-center justify-center `}
       onClick={toggleFavorite}
     >
       {/* {isFavorite ? "♥" : "♡"} */}
       {isFavorite ? (
-        <div className="w-[2rem] h-[2rem] bookmark">
+        <div className="bookmark">
           <img src="/images/full-bookmark.png" alt="찜함" />
         </div>
       ) : (
-        <div className="w-[2rem] h-[2rem] bookmark">
+        <div className="bookmark">
           <img src="/images/empty-bookmark.png" alt="찜 안함" />
         </div>
       )}

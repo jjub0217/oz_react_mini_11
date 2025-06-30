@@ -117,6 +117,10 @@ input[type="file"] {
 .movie-tabs-content {
   .swiper {
     padding-right: 3rem;
+
+    @media screen and (max-width: 768px) {
+      padding-right: 15px;
+    }
     &:after {
       content: "";
       display: block;
@@ -495,6 +499,7 @@ input[type="file"] {
       padding-bottom: 53% !important;
     }
     @media screen and (max-width: 768px) {
+      min-width: auto;
       padding-bottom: 130% !important;
     }
     .movie-poster {
@@ -577,6 +582,26 @@ input[type="file"] {
     }
   }
 }
+.favorite-btn {
+  width: 3rem;
+  height: 3rem;
+  top: 10px;
+  right: 10px;
+  @media screen and (max-width: 768px) {
+    width: 2.3rem;
+    height: 2.3rem;
+    top: 5px;
+    right: 5px;
+  }
+  .bookmark {
+    width: 2rem;
+    height: 2rem;
+    @media screen and (max-width: 768px) {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
+  }
+}
 .movie-popular,
 .movie-now,
 .movie-coming,
@@ -591,6 +616,14 @@ input[type="file"] {
         position: static !important;
       }
     }
+  }
+}
+.movie-popular-infinite {
+  grid-template-columns: repeat(9, 1fr);
+  gap: 20px;
+  @media screen and (max-width: 768px) {
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -674,10 +707,16 @@ input[type="file"] {
 }
 
 .trending-people {
+  .inner {
+    padding-right: 5vw;
+  }
   .people-area {
     grid-template-columns: repeat(7, 1fr);
     @media screen and (max-width: 1700px) {
       grid-template-columns: repeat(4, 1fr);
+    }
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   .movie-poster {
