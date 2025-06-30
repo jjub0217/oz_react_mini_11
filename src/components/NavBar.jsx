@@ -39,7 +39,7 @@ export default function NavBar() {
   };
 
   const handleMyPage = () => {
-    navigate("/mypage");
+    navigate("/my-page");
   };
 
   useEffect(() => {
@@ -81,42 +81,40 @@ export default function NavBar() {
               </div>
             )}
           </button>
-          {user ? (
-            <div
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              <div className="log util-link"></div>
-              <div
-                className={`child ${
-                  isHovering ? "flex" : "hidden"
-                } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
-              >
-                <button type="button" onClick={handleMyPage}>
-                  마이페이지
-                </button>
-                <button type="button" onClick={requestLogOut}>
-                  로그아웃
-                </button>
-              </div>
+          <div
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <div className="w-[43px] h-[43px] rounded-full bg-gray-700  flex items-center justify-center">
+              <img
+                src={user?.user_metadata?.profileImage || "images/user.png"}
+                alt="프로필 이미지"
+                className="w-full h-full rounded-full object-cover"
+              />
             </div>
-          ) : (
             <div
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
+              className={`child ${
+                isHovering ? "flex" : "hidden"
+              } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
             >
-              <div className="util-link"></div>
-              <div
-                className={`child ${
-                  isHovering ? "flex" : "hidden"
-                } absolute right-0 top-[100%] px-[25px] py-[10px] flex-col gap-[10px] bg-[#333] z-10`}
-              >
+              {user ? (
+                <>
+                  {" "}
+                  <button type="button" onClick={handleMyPage}>
+                    마이페이지
+                  </button>
+                  <button type="button" onClick={requestLogOut}>
+                    로그아웃
+                  </button>
+                </>
+              ) : (
                 <button type="button" onClick={handleLogin}>
                   로그인
                 </button>
-              </div>
+              )}
             </div>
-          )}
+          </div>
+
           {/* <Link to={`/login`} className="" /> */}
         </div>
       </div>
