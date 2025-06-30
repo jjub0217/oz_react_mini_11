@@ -64,6 +64,9 @@ export const SisunZip = () => {
             1024: {
               slidesPerView: 9.5,
             },
+            1279: {
+              slidesPerView: 6.2,
+            },
             1920: {
               slidesPerView: 11.5,
             },
