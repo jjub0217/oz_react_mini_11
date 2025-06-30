@@ -1,21 +1,28 @@
 // components/MyFavorite.jsx
-import { useSupabase } from "../context/SupabaseContext";
+import { useOutletContext } from "react-router-dom";
 import { MovieCard } from "./MovieCard";
 
 export default function MyFavorite() {
-  const { favoriteList } = useSupabase();
+  const { favoriteList } = useOutletContext();
 
   return (
-    <section className="h-[100%]">
-      {favoriteList.length === 0 ? (
-        <p>아직 좋아요 누른 영화가 없습니다.</p>
-      ) : (
-        <ul className="movie-list grid grid-cols-9 gap-[1rem] h-[100%] overflow-y-scroll">
-          {favoriteList.map((el) => (
-            <MovieCard key={el.id} {...el} />
-          ))}
-        </ul>
-      )}
-    </section>
+    <div className="h-[100%] overflow-hidden my-favorite">
+      <section className="h-[100%]">
+        {favoriteList.length === 0 ? (
+          <div className="text-white text-center border border-white border-dashed rounded-xl p-6 mt-10">
+            <p className="text-[1.5rem] mb-2">💔 찜한 영화가 없어요</p>
+            <p className="text-[1rem] opacity-70">
+              마음에 드는 영화를 찾아 찜해보세요!
+            </p>
+          </div>
+        ) : (
+          <ul className="movie-list grid grid-cols-9 gap-[1rem] h-[100%] overflow-y-scroll">
+            {favoriteList.map((el) => (
+              <MovieCard key={el.id} {...el} />
+            ))}
+          </ul>
+        )}
+      </section>
+    </div>
   );
 }
