@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../constant/imageBaseUrl";
 import { PEOPLE_COLORS, VERTICAL_TEXTS } from "../constant/verticalText";
-export const TrendingPeople = ({ trendingPeopleList }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+export const TrendingPeople = ({ trendingPeopleList, onImageLoad }) => {
+  // const [isLoaded, setIsLoaded] = useState(false);
   const [isNarrow, setIsNarrow] = useState(window.innerWidth <= 1510);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth <= 1280);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -60,12 +60,19 @@ export const TrendingPeople = ({ trendingPeopleList }) => {
           onClick={() => handleToSisunzip(el.name)}
         >
           <div className="movie-poster">
-            {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>}
+            {/* {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>} */}
             <img
               src={`${IMAGE_BASE_URL.poster}${el.profile_path}`}
               alt={el.name}
-              onLoad={() => setIsLoaded(true)}
-              style={{ display: isLoaded ? "block" : "none" }}
+              onLoad={onImageLoad}
+              style={{
+                width: "100%",
+                height: "auto",
+                objectFit: "cover",
+              }}
+              // style={{
+              //   visibility: isLoaded ? "visible" : "hidden",
+              // }}
             />
             <img
               src={`../../public/images/img_best_artist_item${i + 1}.png`}
