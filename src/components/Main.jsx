@@ -1,13 +1,12 @@
 import { MovieCard } from "./MovieCard";
 
-import { memo, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { memo, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useSupabase } from "../context/SupabaseContext";
 import { TrendingPeople } from "./TrendingPeople";
 export const Main = memo(
   ({
@@ -17,14 +16,29 @@ export const Main = memo(
     upComingMovieList,
     trendingPeopleList,
   }) => {
-    const { showLoginGuide, setShowLoginGuide } = useSupabase();
+    const totalImageCount =
+      10 +
+      popularList.length +
+      playingMovieList.length +
+      upComingMovieList.length +
+      3;
+    const [loadedCount, setLoadedCount] = useState(0);
 
-    const navigate = useNavigate();
+    const handleCardImageLoad = () => {
+      setLoadedCount((prev) => prev + 1);
+    };
+
+    const isAllLoaded = loadedCount >= totalImageCount;
+
     const topSlides = useMemo(
       () =>
         topMovieList.slice(0, 10).map((el) => (
           <SwiperSlide key={el.id}>
-            <MovieCard {...el} isSwiper={true} />
+            <MovieCard
+              {...el}
+              isSwiper={true}
+              onImageLoad={handleCardImageLoad}
+            />
           </SwiperSlide>
         )),
       [topMovieList]
@@ -33,7 +47,7 @@ export const Main = memo(
       () =>
         popularList.map((el) => (
           <SwiperSlide key={el.id}>
-            <MovieCard {...el} />
+            <MovieCard {...el} onImageLoad={handleCardImageLoad} />
           </SwiperSlide>
         )),
       [popularList]
@@ -42,7 +56,7 @@ export const Main = memo(
       () =>
         playingMovieList.map((el) => (
           <SwiperSlide key={el.id}>
-            <MovieCard {...el} />
+            <MovieCard {...el} onImageLoad={handleCardImageLoad} />
           </SwiperSlide>
         )),
       [playingMovieList]
@@ -51,12 +65,13 @@ export const Main = memo(
       () =>
         upComingMovieList.map((el) => (
           <SwiperSlide key={el.id}>
-            <MovieCard {...el} />
+            <MovieCard {...el} onImageLoad={handleCardImageLoad} />
           </SwiperSlide>
         )),
       [upComingMovieList]
     );
     if (
+      topMovieList.length === 0 ||
       popularList.length === 0 ||
       playingMovieList.length === 0 ||
       upComingMovieList.length === 0 ||
@@ -67,13 +82,16 @@ export const Main = memo(
       );
     }
 
-    const handleLogin = () => {
-      navigate("/login");
-      setShowLoginGuide(false);
-    };
-
     return (
       <main className="pb-[50px]">
+        {!isAllLoaded && (
+          <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-black bg-opacity-60">
+            <div className="relative w-12 h-12">
+              <div className="absolute inset-0 rounded-full border-4 border-white opacity-20"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin"></div>
+            </div>
+          </div>
+        )}
         <section className="movie-top">
           <Swiper
             loop={true}
@@ -124,6 +142,9 @@ export const Main = memo(
                 1024: {
                   slidesPerView: 9.5,
                 },
+                1279: {
+                  slidesPerView: 6.2,
+                },
                 1920: {
                   slidesPerView: 11.5,
                 },
@@ -162,6 +183,9 @@ export const Main = memo(
                 1024: {
                   slidesPerView: 9.5,
                 },
+                1279: {
+                  slidesPerView: 6.2,
+                },
                 1920: {
                   slidesPerView: 11.5,
                 },
@@ -194,6 +218,9 @@ export const Main = memo(
                 1024: {
                   slidesPerView: 9.5,
                 },
+                1279: {
+                  slidesPerView: 6.2,
+                },
                 1920: {
                   slidesPerView: 11.5,
                 },
@@ -208,37 +235,12 @@ export const Main = memo(
             <h2 className="font-medium text-[1.6rem] max-[1024px]:text-[1.2rem] max-[768px]:text-[1rem] mb-[10px] text-left">
               OZ 시선집
             </h2>
-            <TrendingPeople trendingPeopleList={trendingPeopleList} />
+            <TrendingPeople
+              trendingPeopleList={trendingPeopleList}
+              onImageLoad={handleCardImageLoad}
+            />
           </div>
         </section>
-        {showLoginGuide && (
-          <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-black bg-opacity-60">
-            <div className="inner bg-[#252525] text-white p-[50px] rounded-[20px] text-center shadow-lg">
-              <h2 className="text-[1.5rem] mb-[30px]">
-                🔒 로그인이 필요합니다
-              </h2>
-              <p className="mb-[25px] text-[0.95rem] text-[#ccc] leading-[1.5]">
-                로그인하시면 관심 영화 등록, 마이페이지 관리 등의 기능을 사용할
-                수 있습니다. <br />
-                지금 로그인하고 나만의 영화 기록을 시작해보세요! 🎬
-              </p>
-              <div className="flex justify-center gap-[10px]">
-                <button
-                  onClick={handleLogin}
-                  className="bg-[#6201e0] px-[20px] py-[10px] rounded-[10px]"
-                >
-                  로그인 하러 가기
-                </button>
-                <button
-                  onClick={() => setShowLoginGuide(false)}
-                  className="bg-[#666] px-[20px] py-[10px] rounded-[10px]"
-                >
-                  닫기
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </main>
     );
   }
