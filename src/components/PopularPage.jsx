@@ -63,7 +63,7 @@ export const PopularPage = () => {
       <section className="grid grid-cols-9 gap-[20px] movie-popular-infinite">
         {movieList.map((movie) => (
           <div key={movie.id}>
-            <MovieCard {...movie} />
+            <MovieCard {...movie} pageType={"popular"} />
           </div>
         ))}
         <div ref={ref} className="h-[1px]" />
