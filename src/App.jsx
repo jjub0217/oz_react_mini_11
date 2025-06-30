@@ -6,7 +6,11 @@ import { Login } from "./components/Login";
 import { Main } from "./components/Main";
 import { MovieDetail } from "./components/MovieDetail";
 import { MovieSearch } from "./components/MovieSearch";
+import MyFavorite from "./components/MyFavorite";
 import { MyPage } from "./components/MyPage";
+import { MyPageHome } from "./components/myPageHome";
+import { MyProfile } from "./components/MyProfile";
+import { MyReview } from "./components/MyReview";
 import OAuthCallback from "./components/OAuthCallback";
 import { PopularPage } from "./components/PopularPage";
 import { SignUp } from "./components/SignUp";
@@ -107,7 +111,12 @@ function App() {
           <Route path={`/login`} element={<Login />} />
           <Route path={`/signup`} element={<SignUp />} />
           <Route path={`/popular`} element={<PopularPage />} />
-          <Route path={`/mypage`} element={<MyPage />} />
+          <Route path={`/my-page`} element={<MyPage />}>
+            <Route index element={<MyPageHome />} />
+            <Route path={`reviews`} element={<MyReview />} />
+            <Route path={`favorites`} element={<MyFavorite />} />
+            <Route path={`profile`} element={<MyProfile />} />
+          </Route>
           <Route path="/oauth/callback" element={<OAuthCallback />} />
         </Route>
       </Routes>
