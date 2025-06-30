@@ -699,6 +699,10 @@ input[type="file"] {
     position: relative;
     padding-bottom: 100%;
     width: 10vw;
+    @media screen and (max-width: 768px) {
+      width: 20vw;
+      padding-bottom: 20%;
+    }
     img {
       position: absolute;
       top: 0;
@@ -927,6 +931,9 @@ input[type="file"] {
   @media screen and (max-width: 1700px) {
     font-size: 1.5rem;
   }
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
   &.my-star {
     font-size: 1rem;
   }
@@ -950,5 +957,22 @@ input[type="file"] {
   .my-page-nav {
     flex-direction: row;
     padding-bottom: 0;
+  }
+}
+
+.total-review,
+.average-rating,
+.average-rating-count {
+  width: calc(100% / 3);
+  @media screen and (max-width: 768px) {
+    // flex-direction: column;
+    width: auto;
+  }
+}
+.average-rating-count {
+  width: 100%;
+  @media screen and (max-width: 768px) {
+    // flex-direction: column;
+    padding-top: 30px;
   }
 }

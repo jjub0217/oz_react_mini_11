@@ -106,9 +106,9 @@ export const MyProfile = () => {
         />
       </div>
 
-      <div className=" flex flex-col gap-[2rem] absolute top-[80%] left-[30px]">
-        <div className="flex items-end gap-[2rem]">
-          <div className="w-[120px] h-[120px] rounded-full bg-gray-700  flex items-center justify-center relative">
+      <div className=" flex flex-col gap-[2rem] absolute top-[80%] left-[30px] max-[768px]:left-[10px]">
+        <div className="flex items-end gap-[2rem] max-[768px]:flex-col max-[768px]:items-start ">
+          <div className="w-[120px] h-[120px] max-[768px]:w-[100px] max-[768px]:h-[100px] rounded-full bg-gray-700  flex items-center justify-center relative">
             <img
               src={user?.user_metadata?.profileImage || "images/user.png"}
               alt="프로필 이미지"

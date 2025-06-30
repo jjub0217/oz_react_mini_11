@@ -42,12 +42,12 @@ export const MyPage = () => {
   return (
     <main>
       <div className="inner px-[5vw]">
-        <div className="my-page flex py-[2rem] gap-[2rem] h-[90vh]">
+        <div className="my-page flex py-[2rem] gap-[2rem] h-[90vh] max-[768px]:h-[auto]">
           <nav className="dashboard-nav bg-[#252525] rounded-[20px] p-[2rem] h-fit">
             <Tabs tabs={tabs} pageType={"mypage"} />
           </nav>
           <section className="movie-tabs-content h-[100%] flex-1 max-[768px]:h-[auto]">
-            <div className="h-[100%] p-[2rem] bg-[#252525] rounded-[20px] ">
+            <div className="h-[100%] p-[2rem] bg-[#252525] rounded-[20px] max-[768px]:h-[100vh]">
               <Outlet context={{ reviewData, favoriteList }} />
             </div>
           </section>

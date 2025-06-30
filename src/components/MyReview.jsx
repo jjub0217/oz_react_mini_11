@@ -49,18 +49,15 @@ export const MyReview = () => {
           </div>
         </div>
       )}
-      <h2 className="text-left mb-[2rem] text-[2rem] max-[1700px]:text-[1.7rem] max-[1700px]:mb-[1rem]">
+      <h2 className="text-left mb-[2rem] text-[2rem] max-[1700px]:text-[1.7rem] max-[1700px]:mb-[1rem] max-[768px]:text-[1rem]">
         My Reviews
       </h2>
-      <div className="border-bottom flex justify-between items-center pb-[1.3rem] border-b-[1px]">
-        <div
-          className="total-review flex flex-col"
-          style={{ width: "calc(100% / 3)" }}
-        >
-          <h3 className="text-[1.3rem] max-[1700px]:text-[1.2rem]">
+      <div className="border-bottom flex justify-between items-center pb-[1.3rem] border-b-[1px] max-[768px]:flex-wrap max-[768px]:gap-[10px] ">
+        <div className="total-review flex flex-col">
+          <h3 className="text-[1.3rem] max-[1700px]:text-[1.2rem] max-[768px]:text-[1rem]">
             Total Reviews
           </h3>
-          <span className="text-[2.2rem] max-[1700px]:text-[1.7rem]">
+          <span className="text-[2.2rem] max-[1700px]:text-[1.7rem] max-[768px]:text-[1rem]">
             {reviewData.total_reviews.toLocaleString()}
           </span>
         </div>
@@ -68,16 +65,13 @@ export const MyReview = () => {
           className="w-[1.2px] self-stretch divider"
           // style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
         />
-        <div
-          className="average-rating flex flex-col items-center"
-          style={{ width: "calc(100% / 3)" }}
-        >
-          <h3 className="text-[1.3rem] max-[1700px]:text-[1.2rem]">
+        <div className="average-rating flex flex-col items-center">
+          <h3 className="text-[1.3rem] max-[1700px]:text-[1.2rem] max-[768px]:text-[1rem]">
             Average Rating
           </h3>
 
           <div className="flex items-center gap-[1rem]">
-            <span className="text-[2.2rem] max-[1700px]:text-[1.7rem]">
+            <span className="text-[2.2rem] max-[1700px]:text-[1.7rem] max-[768px]:text-[1rem]">
               {reviewData.average_rating.toFixed(1)}
             </span>
             <div className="star-rating">
@@ -92,13 +86,10 @@ export const MyReview = () => {
           </div>
         </div>
         <div
-          className="w-[1.2px] self-stretch divider"
+          className="w-[1.2px] self-stretch divider max-[768px]:hidden"
           // style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
         />
-        <div
-          className="average-rating-count flex flex-col items-center"
-          style={{ width: "calc(100% / 3)" }}
-        >
+        <div className="average-rating-count flex flex-col items-center">
           {reviewData.rating_distribution
             .sort((a, b) => b.id - a.id)
             .map((el, i) => {
@@ -140,11 +131,14 @@ export const MyReview = () => {
         </div>
       </div>
 
-      <div className="h-[100%] pb-[10rem] overflow-y-scroll pt-[2.5rem] flex flex-col">
+      <div className="h-[100%] pb-[10rem] overflow-y-scroll pt-[2.5rem] flex flex-col max-[768px]:gap-[2.5rem]">
         {reviewData.reviews.map((el) => {
           const myRating = (el.rating / 5) * 100;
           return (
-            <div key={el.id} className="flex gap-[5rem]">
+            <div
+              key={el.id}
+              className="flex gap-[5rem] max-[768px]:flex-col max-[768px]:gap-[1.5rem]"
+            >
               <div className="movie-info__box flex gap-[1.5rem]">
                 <div
                   className="movie-poster"
@@ -164,22 +158,28 @@ export const MyReview = () => {
                   />
                 </div>
                 <div className="movie-info flex flex-col items-start gap-[0.2rem]">
-                  <div className=" text-[1.3rem]">{el.title}</div>
+                  <div className="text-[1.3rem] max-[768px]:text-[1rem]">
+                    {el.title}
+                  </div>
                   <div className="flex gap-[10px]">
-                    <span>Total rating average</span>
+                    <span className="max-[768px]:text-[0.9rem]">
+                      Total rating average
+                    </span>
                     <span className=" font-semibold">
                       {el.vote_average.toFixed(1)}
                     </span>{" "}
                   </div>
                   <div className="flex gap-[10px]">
-                    <span>Total reviews</span>
+                    <span className="max-[768px]:text-[0.9rem]">
+                      Total reviews
+                    </span>
                     <span className=" font-semibold">
                       {el.total_results.toLocaleString()}
                     </span>
                   </div>
                 </div>
               </div>
-              <div className="my-review__info flex flex-col items-start gap-[1.5rem]">
+              <div className="my-review__info flex flex-col items-start gap-[1.5rem] max-[768px]:gap-[1rem]">
                 <div className="flex items-center gap-[1rem]">
                   <div className="my-star star-rating">
                     <div className="star-back">★★★★★</div>
@@ -190,11 +190,13 @@ export const MyReview = () => {
                       ★★★★★
                     </div>
                   </div>
-                  <div className="date">{el.review_date}</div>
+                  <div className="date max-[768px]:text-[0.9rem]">
+                    {el.review_date}
+                  </div>
                 </div>
                 <div className="review text-left">
                   {el.review_text.split("\n").map((line, i) => (
-                    <p key={i}>
+                    <p key={i} className="max-[768px]:text-[0.9rem]">
                       <span>{line}</span>
                       <br />
                     </p>
