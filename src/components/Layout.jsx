@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { useSupabase } from "../context/SupabaseContext";
+import { LoginGuideModal } from "./LoginGuideModal";
 import NavBar from "./NavBar";
 
 function Layout() {
   const location = useLocation();
+  const { showLoginGuide, setShowLoginGuide } = useSupabase();
   const [isTabletOrSmaller, setIsTabletOrSmaller] = useState(
     window.innerWidth <= 1024
   );
@@ -27,6 +30,9 @@ function Layout() {
     <>
       {!hideNav && <NavBar />}
       <Outlet />
+      {showLoginGuide && (
+        <LoginGuideModal onClose={() => setShowLoginGuide(false)} />
+      )}
     </>
   );
 }
