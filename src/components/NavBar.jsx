@@ -69,7 +69,7 @@ export default function NavBar() {
 
   return (
     <nav className="">
-      <div className="inner flex h-[74px] justify-between items-center px-[5vw]">
+      <div className="inner flex h-[74px] justify-between items-center px-[6vw]">
         <h1 className="font-semibold">
           <Link to="/" className="flex items-center">
             <span className="font-Pixgamer text-[2.4rem] font-black">OZ</span>
@@ -103,11 +103,11 @@ export default function NavBar() {
             onMouseLeave={() => setIsHovering(false)}
             onClick={toggleMenu} // 모바일 대응
           >
-            <div className="w-[43px] h-[43px] rounded-full bg-gray-700 flex items-center justify-center">
+            <div className="w-[25px] h-[25px] flex items-center justify-center">
               <img
                 src={user?.user_metadata?.profileImage || "images/user.png"}
                 alt="프로필 이미지"
-                className="w-full h-full rounded-full object-cover max-[768px]:object-contain max-[768px]:h-[1.5rem]"
+                className="w-full h-full object-cover max-[768px]:object-contain max-[768px]:h-[1.5rem]"
               />
             </div>
             <div

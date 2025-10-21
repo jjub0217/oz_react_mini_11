@@ -6,25 +6,6 @@ import myReviewData from "../data/myReviewData.json";
 export const useSupabaseReview = () => {
   const { supabase, user } = useSupabase();
 
-  // console.log(user);
-  /**
-   * app_metadata: {provider: 'email', providers: Array(1)},
-    aud: "authenticated",
-    confirmed_at: "2025-06-25T06:49:13.990792Z",
-    created_at: "2025-06-25T06:49:13.981383Z",
-    email: "noonssub1004@naver.com",
-    email_confirmed_at: "2025-06-25T06:49:13.990792Z",
-    id: "39bb531a-3e96-4808-bcc2-4f28fdbe4084",
-    identities: [{created_at: "2025-06-25T06:49:13.985115Z", email: "noonssub1004@naver.com", id: "39bb531a-3e96-4808-bcc2-4f28fdbe4084", identity_data: {email: 'noonssub1004@naver.com', email_verified: false, name: '강주현', phone_verified: false, sub: '39bb531a-3e96-4808-bcc2-4f28fdbe4084'}, identity_id: "437b41e2-f911-462c-a793-5953ff25587e", last_sign_in_at: "2025-06-25T06:49:13.985066Z, "provider: "email", updated_at: "2025-06-25T06:49:13.985115Z", user_id: "39bb531a-3e96-4808-bcc2-4f28fdbe4084"}],
-    is_anonymous: false,
-    last_sign_in_at: "2025-06-29T06:25:44.064017314Z",
-    phone: "",
-    role: "authenticated",
-    updated_at: "2025-06-29T06:25:44.069102Z",
-    user_metadata: {email: 'noonssub1004@naver.com', email_verified: true, name: '강주현', phone_verified: false, sub: '39bb531a-3e96-4808-bcc2-4f28fdbe4084'}
-   */
-
-  // ✅ 더미 리뷰 삽입
   const insertDummyReviews = useCallback(async () => {
     const dummyData = [...myReviewData.reviews];
 

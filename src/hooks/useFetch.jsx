@@ -16,17 +16,33 @@ const useFetch = (initialUrl = null) => {
   const getData = useCallback(async (customUrl) => {
     setIsLoading(true);
     try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       const res = await fetch(customUrl, options);
       if (!res.ok) throw new Error("데이터를 가져오는 데 실패했습니다.");
       const json = await res.json();
-      return json; //  외부에서 가공 가능해야 하기 때문에
+      return json;
     } catch (err) {
       setError(err);
       return null;
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, []); // 🔒 빈 배열로 고정
+  // const getData = useCallback(async (customUrl) => {
+  //   setIsLoading(true);
+  //   try {
+  //     await new Promise((resolve) => setTimeout(resolve, 1000));
+  //     const res = await fetch(customUrl, options);
+  //     if (!res.ok) throw new Error("데이터를 가져오는 데 실패했습니다.");
+  //     const json = await res.json();
+  //     return json; //  외부에서 가공 가능해야 하기 때문에
+  //   } catch (err) {
+  //     setError(err);
+  //     return null;
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (!initialUrl) return;
@@ -37,4 +53,5 @@ const useFetch = (initialUrl = null) => {
 
   return { isLoading, data, error, getData };
 };
+
 export default useFetch;

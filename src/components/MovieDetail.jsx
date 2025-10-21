@@ -12,13 +12,11 @@ import { Tabs } from "./Tabs";
 export const MovieDetail = () => {
   const { id } = useParams();
   const { data: movieDetail } = useFetch(`${API_URL}/movie/${id}?language=ko`);
-  // const [isLoaded, setIsLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState("comments");
   const [loadedCount, setLoadedCount] = useState(0);
   const { data: detailInfo } = useFetch(
     `${API_URL}/movie/${id}/reviews?language=en-US&page=1`
   );
-  // console.log(movieDetail);
 
   const commentList = detailInfo?.results ?? [];
   const commentCount = detailInfo?.results?.length ?? 0;
@@ -37,7 +35,7 @@ export const MovieDetail = () => {
   const isAllLoaded = loadedCount >= totalImageCount;
 
   return (
-    <div className="mt-[2rem] relative">
+    <div className="relative">
       {!isAllLoaded && (
         <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-black bg-opacity-60">
           <div className="relative w-12 h-12">
@@ -90,15 +88,12 @@ export const MovieDetail = () => {
             </div>
 
             <div className="movie-poster__backdrop h-full">
-              {/* {!isLoaded && <p>🖼️ 이미지 로딩 중...</p>} */}
               <img
                 src={`${IMAGE_BASE_URL.backdrop}${movieDetail.backdrop_path}`}
                 alt={movieDetail.title}
                 onLoad={onImageLoad}
                 style={{
                   visibility: isAllLoaded ? "visible" : "hidden",
-                  // width: "100%",
-                  // height: "auto",
                 }}
                 className="h-full object-cover"
               />
@@ -107,12 +102,11 @@ export const MovieDetail = () => {
         </div>
       </section>
       <section className="movie-tab__info pb-[80px] mt-[6.5rem] max-[768px]:px-[5vw] ">
-        <div className="inner text-left w-full ">
+        <div className="inner text-left w-full">
           <Tabs setActiveTab={setActiveTab} tabs={tabs} id={id} />
           <div className="movie-tabs-content">
             <div
               style={{ display: activeTab === "comments" ? "block" : "none" }}
-              className="pr-[5vw]"
             >
               <CommentContent
                 detailInfo={commentList}

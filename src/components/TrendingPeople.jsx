@@ -88,13 +88,13 @@ export const TrendingPeople = ({ trendingPeopleList, onImageLoad }) => {
                   {verticalTexts.map((text, idx) => (
                     <div
                       key={idx}
-                      className="flex flex-col items-center gap-[3px] "
+                      className="flex flex-col items-center gap-[3px] text-[1vw] "
                     >
-                      <span className="item-text flex flex-col flex-wrap items-center">
+                      <span className="item-text flex flex-col flex-wrap items-center ">
                         {text.split("").map((char, cIdx) => (
                           <span
                             key={cIdx}
-                            className="vertical-text rotate-90 text-[16px] max-[1700px]:text-[0.75rem] max-[1024px]:text-[0.75rem]"
+                            className="vertical-text rotate-90 text-[0.6vw] max-[1700px]:text-[0.75rem] max-[1024px]:text-[0.75rem]"
                           >
                             {char === " " ? "\u00A0" : char}
                           </span>

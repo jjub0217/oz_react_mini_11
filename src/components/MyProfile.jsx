@@ -112,7 +112,7 @@ export const MyProfile = () => {
             <img
               src={user?.user_metadata?.profileImage || "images/user.png"}
               alt="프로필 이미지"
-              className="w-full h-[5rem] rounded-full object-contain"
+              className="w-full h-full rounded-full object-cover"
             />
             <button
               type="button"

@@ -25,7 +25,7 @@ export const Login = () => {
     const isValid = Object.values(errorType).every((val) => val === "");
     if (!isValid) return;
     const { email, password } = loginUserInfo;
-    const { data, error } = await login({ email, password });
+    const { error } = await login({ email, password });
     // console.log("✅ 로그인 응답:", data, error);
     if (!error) {
       navigate("/");

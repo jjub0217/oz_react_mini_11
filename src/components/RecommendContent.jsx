@@ -103,19 +103,19 @@ export const RecommendContent = ({ id, genres }) => {
               modules={[Navigation]}
               breakpoints={{
                 320: {
-                  slidesPerView: 3.5,
+                  slidesPerView: 4,
                 },
                 640: {
-                  slidesPerView: 3.5,
+                  slidesPerView: 4,
                 },
                 768: {
-                  slidesPerView: 6.5,
+                  slidesPerView: 7.5,
                 },
                 1279: {
-                  slidesPerView: 5.2,
+                  slidesPerView: 6,
                 },
                 1920: {
-                  slidesPerView: 11.5,
+                  slidesPerView: 12.5,
                 },
               }}
             >
@@ -147,19 +147,19 @@ export const RecommendContent = ({ id, genres }) => {
               modules={[Navigation]}
               breakpoints={{
                 320: {
-                  slidesPerView: 3.5,
+                  slidesPerView: 4,
                 },
                 640: {
-                  slidesPerView: 3.5,
+                  slidesPerView: 4,
                 },
                 768: {
-                  slidesPerView: 6.5,
+                  slidesPerView: 7.5,
                 },
                 1024: {
-                  slidesPerView: 5.5,
+                  slidesPerView: 6.5,
                 },
                 1920: {
-                  slidesPerView: 11.5,
+                  slidesPerView: 12.5,
                 },
               }}
             >

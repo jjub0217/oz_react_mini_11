@@ -18,7 +18,7 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
   };
 
   return (
-    <div className="mt-6">
+    <div>
       <p className="text-gray-400 text-[1.4rem] max-[1279px]:text-[1.2rem] max-[768px]:text-[1rem]">
         리뷰 <span>{commentCount}</span>개
       </p>
@@ -31,14 +31,20 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
       />
 
       {detailInfo.length ? (
-        detailInfo.map((el) => {
+        detailInfo.map((el, i) => {
           const isExpanded =
             Array.isArray(selectIds) && selectIds.includes(el.id);
+          const isLast = i === detailInfo.length - 1;
           return (
             <div
               key={el.id}
-              style={{ borderColor: "rgba(255, 255, 255, 0.2)" }}
-              className="pt-[2rem] border-b-[1px] pb-[20px]"
+              style={{
+                borderColor: "rgba(255, 255, 255, 0.2)",
+                borderBottom: isLast
+                  ? "none"
+                  : "1px solid rgba(255, 255, 255, 0.2)",
+              }}
+              className="pt-[2rem] pb-[20px]"
             >
               <div className="text-sm text-gray-400 flex gap-[10px] items-center pb-[1rem]">
                 <div

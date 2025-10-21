@@ -138,8 +138,8 @@ export const MyPageHome = () => {
                 </p>
               </div>
             ) : (
-              <div lassName="grid grid-cols-4 gap-4 dashboard-favorite">
-                {favoriteList.slice(0, 5).map((movie) => (
+              <div className="grid grid-cols-4 gap-4 dashboard-favorite">
+                {favoriteList.slice(0, 8).map((movie) => (
                   <div
                     key={movie.id}
                     className="movie-poster rounded-xl overflow-hidden"

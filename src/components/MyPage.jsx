@@ -9,12 +9,12 @@ import { Tabs } from "./Tabs";
 export const MyPage = () => {
   const tabs = getMyTabs();
 
-  const { getReviews, updateReview, deleteReview } = useSupabaseReview();
+  const { getReviews } = useSupabaseReview();
   const { user, setFavoriteList: setGlobalFavoriteList } = useSupabase();
   const { fetchFavorites } = useSupabaseFavorite();
   const [favoriteList, setFavoriteList] = useState([]);
   const [reviewData, setReviewData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [setLoading] = useState(true);
 
   useEffect(() => {
     const fetch = async () => {

@@ -37,7 +37,7 @@ function App() {
     `${API_URL}/movie/popular?language=ko&page=1`
   );
   const { data: topData } = useFetch(
-    `${API_URL}/movie/top_rated?language=en-US&page=1`
+    `${API_URL}/trending/movie/day?language=en-US&page=1`
   );
   const { data: playingList } = useFetch(
     `${API_URL}/movie/now_playing?language=ko&page=1`

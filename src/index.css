@@ -15,4 +15,5 @@
   src: url("/fonts/PixgamerRegular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }

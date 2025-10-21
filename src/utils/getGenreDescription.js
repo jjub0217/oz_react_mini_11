@@ -1,7 +1,6 @@
 export const getGenreDescription = (genreId, genreMetaList) => {
   const genre = genreMetaList.find((g) => g.id === genreId);
   if (!genre) return "인기 영화";
-  console.log(genre.id);
   const genreData = {
     28: "짜릿한 전투의 세계, 액션 영화",
     12: "끝없는 여정을 따라가는 모험 영화",
