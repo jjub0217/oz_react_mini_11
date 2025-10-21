@@ -8,7 +8,7 @@ import { MovieDetail } from "./components/MovieDetail";
 import { MovieSearch } from "./components/MovieSearch";
 import MyFavorite from "./components/MyFavorite";
 import { MyPage } from "./components/MyPage";
-import { MyPageHome } from "./components/myPageHome";
+import { MyPageHome } from "./components/MyPageHome";
 import { MyProfile } from "./components/MyProfile";
 import { MyReview } from "./components/MyReview";
 import OAuthCallback from "./components/OAuthCallback";
