@@ -17,8 +17,11 @@ export const RecommendContent = ({ id, genres }) => {
   const [actorMovie, setActorMovie] = useState({});
 
   useEffect(() => {
-    // ✅ 1. 장르별 인기 영화 리스트
+    if (!id) return;
+
+    // ✅ 장르별 + 배우별 데이터를 병렬로 요청
     const fetchGenres = async () => {
+      if (!genres || genres.length === 0) return;
       const result = await Promise.all(
         genres.map(async (genre) => {
           const url = `${API_URL}/discover/movie?with_genres=${genre.id}&sort_by=popularity.desc&language=ko&page=1`;
@@ -29,19 +32,13 @@ export const RecommendContent = ({ id, genres }) => {
           return { genreName: genre.name, movies: filtered ?? [] };
         })
       );
-
-      // genreMap: { [장르 이름]: 영화 리스트 }
       const genreMap = {};
       result.forEach(({ genreName, movies }) => {
         genreMap[genreName] = movies;
       });
       setGenreMovie(genreMap);
     };
-    if (id && genres.length > 0) fetchGenres();
-  }, [id, genres, getData]);
 
-  // ✅ 2. 배우별 출연 영화 데이터 요청
-  useEffect(() => {
     const fetchActors = async () => {
       const creditUrl = `${API_URL}/movie/${id}/credits?language=ko`;
       const creditJson = await getData(creditUrl);
@@ -60,7 +57,6 @@ export const RecommendContent = ({ id, genres }) => {
           };
         })
       );
-
       const map = {};
       result.forEach(({ actorName, movies }) => {
         map[actorName] = movies;
@@ -68,8 +64,8 @@ export const RecommendContent = ({ id, genres }) => {
       setActorMovie(map);
     };
 
-    if (id) fetchActors();
-  }, [id, getData]);
+    Promise.all([fetchGenres(), fetchActors()]);
+  }, [id, genres, getData]);
 
   useEffect(() => {
     const fetchGenreList = async () => {

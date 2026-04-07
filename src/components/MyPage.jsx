@@ -17,24 +17,21 @@ export const MyPage = () => {
   const [setLoading] = useState(true);
 
   useEffect(() => {
-    const fetch = async () => {
-      const data = await getReviews();
-      if (data) setReviewData(data);
-    };
-    fetch();
-  }, [getReviews]);
+    if (!user) return;
 
-  useEffect(() => {
-    const loadFavorites = async () => {
-      if (user) {
-        const favorites = await fetchFavorites(user.id);
-        setFavoriteList(favorites);
-        setGlobalFavoriteList(favorites);
-      }
+    const loadData = async () => {
+      const [reviewResult, favorites] = await Promise.all([
+        getReviews(),
+        fetchFavorites(user.id),
+      ]);
+
+      if (reviewResult) setReviewData(reviewResult);
+      setFavoriteList(favorites);
+      setGlobalFavoriteList(favorites);
       setLoading(false);
     };
-    loadFavorites();
-  }, [user]);
+    loadData();
+  }, [user, getReviews, fetchFavorites]);
 
   if (!reviewData) return <p>로딩 중...</p>;
   // console.log(reviewData);

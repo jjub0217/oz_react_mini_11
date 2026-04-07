@@ -1,31 +1,46 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Layout from "./components/Layout";
-import { Login } from "./components/Login";
 import { Main } from "./components/Main";
-import { MovieDetail } from "./components/MovieDetail";
-import { MovieSearch } from "./components/MovieSearch";
-import MyFavorite from "./components/MyFavorite";
-import { MyPage } from "./components/MyPage";
-import { MyPageHome } from "./components/MyPageHome";
-import { MyProfile } from "./components/MyProfile";
-import { MyReview } from "./components/MyReview";
-import OAuthCallback from "./components/OAuthCallback";
-import { PopularPage } from "./components/PopularPage";
-import { SignUp } from "./components/SignUp";
-import { SisunZip } from "./components/Sisunzip";
 import { API_URL } from "./constant/imageBaseUrl";
 import { useAuth } from "./hooks/useAuth";
 import useFetch from "./hooks/useFetch";
 
-function App() {
-  const [popularList, setPopularList] = useState([]);
-  const [topMovieList, setTopMovieList] = useState([]);
-  const [playingMovieList, setPlayingMovieList] = useState([]);
-  const [upComingMovieList, setUpComingMovieList] = useState([]);
-  const [trendingPeopleList, setTrendingPeopleList] = useState([]);
+const Login = lazy(() =>
+  import("./components/Login").then((m) => ({ default: m.Login }))
+);
+const SignUp = lazy(() =>
+  import("./components/SignUp").then((m) => ({ default: m.SignUp }))
+);
+const MovieDetail = lazy(() =>
+  import("./components/MovieDetail").then((m) => ({ default: m.MovieDetail }))
+);
+const MovieSearch = lazy(() =>
+  import("./components/MovieSearch").then((m) => ({ default: m.MovieSearch }))
+);
+const MyPage = lazy(() =>
+  import("./components/MyPage").then((m) => ({ default: m.MyPage }))
+);
+const MyPageHome = lazy(() =>
+  import("./components/MyPageHome").then((m) => ({ default: m.MyPageHome }))
+);
+const MyProfile = lazy(() =>
+  import("./components/MyProfile").then((m) => ({ default: m.MyProfile }))
+);
+const MyReview = lazy(() =>
+  import("./components/MyReview").then((m) => ({ default: m.MyReview }))
+);
+const MyFavorite = lazy(() => import("./components/MyFavorite"));
+const OAuthCallback = lazy(() => import("./components/OAuthCallback"));
+const PopularPage = lazy(() =>
+  import("./components/PopularPage").then((m) => ({ default: m.PopularPage }))
+);
+const SisunZip = lazy(() =>
+  import("./components/Sisunzip").then((m) => ({ default: m.SisunZip }))
+);
 
+function App() {
   const { getUserInfo } = useAuth();
 
   useEffect(() => {
@@ -49,45 +64,39 @@ function App() {
     `${API_URL}/person/popular?language=ko&page=1`
   );
 
-  useEffect(() => {
-    if (topData?.results) {
-      setTopMovieList(topData.results.filter((el) => !el.adult));
-    }
-  }, [topData]);
+  const topMovieList = useMemo(
+    () => topData?.results?.filter((el) => !el.adult) ?? [],
+    [topData]
+  );
 
-  useEffect(() => {
-    if (popularData?.results) {
-      setPopularList(popularData.results.filter((el) => !el.adult));
-    }
-  }, [popularData]);
+  const popularList = useMemo(
+    () => popularData?.results?.filter((el) => !el.adult) ?? [],
+    [popularData]
+  );
 
-  useEffect(() => {
-    if (playingList?.results) {
-      setPlayingMovieList(playingList.results.filter((el) => !el.adult));
-    }
-  }, [playingList]);
+  const playingMovieList = useMemo(
+    () => playingList?.results?.filter((el) => !el.adult) ?? [],
+    [playingList]
+  );
 
-  useEffect(() => {
-    if (upComingList?.results) {
-      setUpComingMovieList(upComingList.results.filter((el) => !el.adult));
-    }
-  }, [upComingList]);
+  const upComingMovieList = useMemo(
+    () => upComingList?.results?.filter((el) => !el.adult) ?? [],
+    [upComingList]
+  );
 
-  useEffect(() => {
-    if (trendingData?.results) {
-      const list = trendingData.results.filter(
-        (el) =>
-          !el.adult &&
-          el.known_for_department !== null &&
-          el.known_for.length !== 0
-      );
-
-      setTrendingPeopleList(list.filter((el) => el.profile_path));
-    }
+  const trendingPeopleList = useMemo(() => {
+    if (!trendingData?.results) return [];
+    return trendingData.results.filter(
+      (el) =>
+        !el.adult &&
+        el.known_for_department !== null &&
+        el.known_for.length !== 0 &&
+        el.profile_path
+    );
   }, [trendingData]);
 
   return (
-    <>
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route
@@ -120,7 +129,7 @@ function App() {
           <Route path="/oauth/callback" element={<OAuthCallback />} />
         </Route>
       </Routes>
-    </>
+    </Suspense>
   );
 }
 
