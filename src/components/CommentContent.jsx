@@ -63,7 +63,7 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
                     src={
                       el.author_details.avatar_path
                         ? `${IMAGE_BASE_URL.backdrop}${el.author_details.avatar_path}`
-                        : "../../public/images/user.png"
+                        : "/images/user.png"
                     }
                     alt={el.author}
                     className={

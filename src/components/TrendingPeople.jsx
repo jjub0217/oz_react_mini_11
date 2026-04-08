@@ -75,7 +75,7 @@ export const TrendingPeople = ({ trendingPeopleList, onImageLoad }) => {
               // }}
             />
             <img
-              src={`../../public/images/img_best_artist_item${i + 1}.png`}
+              src={`/images/img_best_artist_item${i + 1}.png`}
               alt=""
               className="absolute bottom-[10px] right-[10px] w-[50px] h-[50px] z-[2]"
             />

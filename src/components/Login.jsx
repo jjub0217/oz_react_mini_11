@@ -111,7 +111,7 @@ export const Login = () => {
               }
               className="kakao-login"
             >
-              <img src="../../public/images/kakao.svg" alt="카카오로 로그인" />
+              <img src="/images/kakao.svg" alt="카카오로 로그인" />
             </button>
             <button
               type="button"
@@ -120,7 +120,7 @@ export const Login = () => {
               }
               className="google-login"
             >
-              <img src="../../public/images/google.svg" alt="구글로 로그인" />
+              <img src="/images/google.svg" alt="구글로 로그인" />
             </button>
           </div>
         </form>
