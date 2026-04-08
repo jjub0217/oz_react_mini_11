@@ -26,14 +26,14 @@ export const MyPageHome = () => {
 
   return (
     <div className="my-page flex flex-col gap-[3rem] h-full">
-      {!isAllLoaded && (
+      {!isAllLoaded ? (
         <div className="fixed inset-0 z-[9999] flex flex-col justify-center items-center bg-black bg-opacity-60">
           <div className="relative w-16 h-16">
             <div className="absolute inset-0 rounded-full border-4 border-white opacity-20"></div>
             <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin"></div>
           </div>
         </div>
-      )}
+      ) : null}
       <h2 className="text-[1.5rem]">
         👋 안녕하세요,
         <span className="text-purple-400">

@@ -41,14 +41,14 @@ export const MyReview = () => {
 
   return (
     <div className="my-review h-full overflow-hidden">
-      {!isAllLoaded && (
+      {!isAllLoaded ? (
         <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-black bg-opacity-60">
           <div className="relative w-12 h-12">
             <div className="absolute inset-0 rounded-full border-4 border-white opacity-20"></div>
             <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin"></div>
           </div>
         </div>
-      )}
+      ) : null}
       <h2 className="text-left mb-[2rem] text-[2rem] max-[1700px]:text-[1.7rem] max-[1700px]:mb-[1rem] max-[768px]:text-[1rem]">
         My Reviews
       </h2>
