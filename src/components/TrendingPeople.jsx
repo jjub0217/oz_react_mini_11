@@ -80,7 +80,7 @@ export const TrendingPeople = ({ trendingPeopleList, onImageLoad }) => {
               className="absolute bottom-[10px] right-[10px] w-[50px] h-[50px] z-[2]"
             />
             <div className="flex gap-[10px] absolute left-[10px] top-[10px] z-[2]">
-              {!isDesktop && (
+              {!isDesktop ? (
                 <div
                   className={`flex flex-col gap-[10px] items-center`}
                   style={{ color: PEOPLE_COLORS[i] }}
@@ -101,18 +101,18 @@ export const TrendingPeople = ({ trendingPeopleList, onImageLoad }) => {
                         ))}
                       </span>
 
-                      {idx < verticalTexts.length - 1 && (
+                      {idx < verticalTexts.length - 1 ? (
                         <div
                           className="w-[0.7rem] h-[1px] mt-[3px]"
                           style={{ backgroundColor: PEOPLE_COLORS[i] }}
                         />
-                      )}
+                      ) : null}
                     </div>
                   ))}
                 </div>
-              )}
+              ) : null}
 
-              {!isMobile && (
+              {!isMobile ? (
                 <span className="flex flex-col items-center">
                   {el.name.split("").map((char, idx) => (
                     <span
@@ -124,7 +124,7 @@ export const TrendingPeople = ({ trendingPeopleList, onImageLoad }) => {
                     </span>
                   ))}
                 </span>
-              )}
+              ) : null}
             </div>
           </div>
         </div>

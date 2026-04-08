@@ -89,17 +89,15 @@ export const CommentContent = ({ detailInfo, commentCount }) => {
                 </p>
               </div>
 
-              {el.content.length > 400 && (
+              {el.content.length > 400 ? (
                 <button
-                  className={`text-[#aaa] underline text-sm mt-2
-                  `}
+                  className="text-[#aaa] underline text-sm mt-2"
                   type="button"
                   onClick={() => toggleSelect(el.id)}
                 >
-                  {/* {el.content.length} */}
                   {isExpanded ? "접기" : "더보기"}
                 </button>
-              )}
+              ) : null}
             </div>
           );
         })

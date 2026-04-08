@@ -58,14 +58,11 @@ export const Login = () => {
             <legend className="text-[1.2rem] mb-[30px] max-[820px]:hidden">
               OZ무비 계정으로 로그인
             </legend>
-            {authError && (
+            {authError ? (
               <div className="auth-error bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4">
                 {authError}
-                {/* <button className="text-sm underline ml-2">
-                  비밀번호 재설정
-                </button> */}
               </div>
-            )}
+            ) : null}
             <InputField
               label="이메일"
               name="email"

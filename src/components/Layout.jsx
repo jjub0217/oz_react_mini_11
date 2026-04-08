@@ -28,11 +28,11 @@ function Layout() {
 
   return (
     <>
-      {!hideNav && <NavBar />}
+      {!hideNav ? <NavBar /> : null}
       <Outlet />
-      {showLoginGuide && (
+      {showLoginGuide ? (
         <LoginGuideModal onClose={() => setShowLoginGuide(false)} />
-      )}
+      ) : null}
     </>
   );
 }

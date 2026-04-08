@@ -84,14 +84,14 @@ export const Main = memo(
 
     return (
       <main className="pb-[50px]">
-        {!isAllLoaded && (
+        {!isAllLoaded ? (
           <div className="fixed inset-0 z-[9999] flex justify-center items-center bg-black bg-opacity-60">
             <div className="relative w-12 h-12">
               <div className="absolute inset-0 rounded-full border-4 border-white opacity-20"></div>
               <div className="absolute inset-0 rounded-full border-4 border-white border-t-transparent animate-spin"></div>
             </div>
           </div>
-        )}
+        ) : null}
         <section className="movie-top">
           <Swiper
             loop={true}
