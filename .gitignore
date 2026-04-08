@@ -23,5 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# Claude Code / OMC
+.claude/
+.omc/
+
 # Environment variables
 .env
